@@ -9,31 +9,38 @@
     @vite('resources/css/app.css')
 
     <title>@yield('title')</title>
+
 </head>
 
 <body class="bg-gray-200">
-    <div class="flex h-screen">
+    <div class="flex flex-col md:flex-row min-h-screen">
         <!-- Sidebar -->
-        <div class="w-1/5 bg-gray-900 text-white">
+        <div id="sidebar" class="md:w-1/6 bg-gray-900 text-white flex flex-col justify-between">
             <div class="p-4">
-                <div class="flex items-center justify-between">
-                    <h1 class="text-xl font-bold">Admin Dashboard</h1>
-                    <button id="sidebar-toggle"
-                        class="focus:outline-none focus:text-white text-gray-500 hover:text-white">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M4 6h16M4 12h8m-8 6h16"></path>
+                <a href="{{ url('/index') }}">
+                    <h1 class="text-2xl font-bold text-center">E-Shirts</h1>
+                </a>
+            </div>
+            <nav class="mt-4 h-auto">
+                <a class="block py-2 px-4 text-sm font-semibold" href="{{ url('/index') }}">Dashboard</a>
+                <a class="block py-2 px-4 text-sm font-semibold" href="{{ url('/categories') }}">Category</a>
+                <a class="block py-2 px-4 text-sm font-semibold" href="#">Products</a>
+                <a class="block py-2 px-4 text-sm font-semibold" href="#">Orders</a>
+                <a class="block py-2 px-4 text-sm font-semibold" href="#">Users</a>
+            </nav>
+
+            <div class="mt-auto hidden md:block">
+                <a class="block py-2 px-4 text-sm font-semibold text-xl" href="#">Setting</a>
+                <div class="text-center">
+                    <button id="sidebar-toggle" class="text-white px-3 py-2 rounded-md shadow">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                            <path fill-rule="evenodd"
+                                d="M2 5h20a1 1 0 010 2H2a1 1 0 010-2zm0 6h20a1 1 0 010 2H2a1 1 0 010-2zm0 6h20a1 1 0 010 2H2a1 1 0 010-2z"
+                                clip-rule="evenodd" />
                         </svg>
                     </button>
                 </div>
             </div>
-            <nav class="mt-4">
-                <a class="block py-2 px-4 text-sm font-semibold" href="#">Dashboard</a>
-                <a class="block py-2 px-4 text-sm font-semibold" href="#">Users</a>
-                <a class="block py-2 px-4 text-sm font-semibold" href="#">Products</a>
-                <a class="block py-2 px-4 text-sm font-semibold" href="#">Orders</a>
-            </nav>
         </div>
 
         <!-- Main Content -->
@@ -41,13 +48,17 @@
             <!-- Navbar -->
             <nav class="flex justify-between items-center bg-white p-4 shadow">
                 <div>
-                    <h1 class="text-xl font-semibold">Admin Dashboard</h1>
+                    <h1 class="text-xl font-semibold">@yield('sub-title')</h1>
                 </div>
-                <div>
-                    <a class="text-gray-600 hover:text-gray-900 px-4" href="#">Profile</a>
-                    <a class="text-gray-600 hover:text-gray-900 px-4" href="#">Settings</a>
-                    <a class="text-red-600 hover:text-red-900 px-4" href="#">Logout</a>
-                </div>
+                <form action="{{ route('logout') }}" method="post">
+                    @csrf
+                    <div>
+                        <a class="text-gray-600 hover:text-gray-900 px-4" href="#">Profile</a>
+                        {{-- <a class="text-gray-600 hover:text-gray-900 px-4" href="#">Settings</a> --}}
+                        <button class="text-red-600 hover:text-red-900 px-4"
+                            onclick="return confirm('Are you sure you want to logout')">Logout</button>
+                    </div>
+                </form>
             </nav>
 
             <!-- Content -->
@@ -56,13 +67,14 @@
             </div>
         </div>
     </div>
-    <script src="{{ mix('js/app.js') }}"></script>
+
     <script>
         const sidebarToggle = document.getElementById('sidebar-toggle');
-        const sidebar = document.querySelector('.w-1/5');
+        const sidebar = document.getElementById('sidebar');
 
         sidebarToggle.addEventListener('click', () => {
-            sidebar.classList.toggle('hidden');
+            sidebar.classList.toggle('md:w-1/6');
+            sidebar.classList.toggle('w-1/12');
         });
     </script>
     @yield('script')
