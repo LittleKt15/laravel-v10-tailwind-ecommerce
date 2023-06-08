@@ -5,16 +5,23 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+    public function __construct()
+    {
+        $this->middleware('isAdmin');
+    }
+
     public function index()
     {
         $categories = Category::paginate(5);
-        return view('admin.category.index', compact('categories'));
+        $user = Auth::user();
+        return view('admin.category.index', compact('categories', 'user'));
     }
 
     /**
@@ -22,7 +29,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.category.create');
+        $user = Auth::user();
+        return view('admin.category.create', compact('user'));
     }
 
     /**
@@ -55,7 +63,8 @@ class CategoryController extends Controller
     public function edit(string $id)
     {
         $category = Category::find($id);
-        return view('admin.category.edit', compact('category'));
+        $user = Auth::user();
+        return view('admin.category.edit', compact('category', 'user'));
     }
 
     /**

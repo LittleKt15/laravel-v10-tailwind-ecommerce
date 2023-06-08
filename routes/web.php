@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\CategoryController;
+use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -43,6 +44,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/index', [AdminController::class, 'index']);
 
     Route::resource('/categories', CategoryController::class);
+    Route::resource('/products', ProductController::class);
 });
 
 require __DIR__.'/auth.php';

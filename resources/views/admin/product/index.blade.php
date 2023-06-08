@@ -1,12 +1,12 @@
 @extends('layouts.dashboard')
-@section('title', 'Category')
+@section('title', 'Product')
 @section('content')
     <div class="container mx-auto p-5">
         <div class="align-middle">
-            <span class="text-gray-700 text-xl font-semibold">Category List</span>
-            <a href="{{ url('categories/create') }}"
+            <span class="text-gray-700 text-xl font-semibold">Product List</span>
+            <a href="{{ url('products/create') }}"
                 class="float-right py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75">Add
-                Category</a>
+                Product</a>
         </div>
 
         @if (Session('add'))
@@ -38,7 +38,8 @@
         @endif
 
         @if (Session('del'))
-            <div id="alert-2" class="flex p-4 mt-10 text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 clear-both"
+            <div id="alert-2"
+                class="flex p-4 mt-10 text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 clear-both"
                 role="alert">
                 <svg aria-hidden="true" class="flex-shrink-0 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                     xmlns="http://www.w3.org/2000/svg">
@@ -68,24 +69,33 @@
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                         <th scope="col" class="px-6 py-3">No.</th>
-                        <th scope="col" class="px-6 py-3">Name</th>
+                        <th scope="col" class="px-6 py-3">Product</th>
+                        <th scope="col" class="px-6 py-3">Category</th>
+                        <th scope="col" class="px-6 py-3">Description</th>
+                        <th scope="col" class="px-6 py-3">Image</th>
+                        <th scope="col" class="px-6 py-3">Price</th>
                         <th scope="col" class="px-6 py-3">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($categories as $index => $category)
+                    @foreach ($products as $index => $product)
                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                             <th scope="row"
-                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                {{ $index + $categories->firstItem() }}</th>
-                            <td class="px-6 py-4">{{ $category->name }}</td>
+                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $index + $products->firstItem() }}</th>
+                            <td class="px-6 py-4">{{ $product->name }}</td>
+                            <td class="px-6 py-4">{{ $product->category->name }}</td>
+                            <td class="px-6 py-4">{{ $product->description }}</td>
                             <td class="px-6 py-4">
-                                <form action="{{ url('/categories/' . $category->id) }}" method="POST">
+                                <img src="{{ asset('storage/product-images/' . $product->image) }}" alt=""
+                                    width="100px">
+                            </td>
+                            <td class="px-6 py-4">{{ $product->price }}$</td>
+                            <td class="px-6 py-4">
+                                <form action="{{ url('/products/' . $product->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <div class="flex gap-4">
-                                        <a x-data="{ tooltip: 'Edite' }"
-                                            href="{{ url('/categories/' . $category->id . '/edit') }}"
+                                        <a x-data="{ tooltip: 'Edite' }" href="{{ url('/products/' . $product->id . '/edit') }}"
                                             class="text-green-600">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                 stroke-width="1.5" stroke="currentColor" class="h-6 w-6"
@@ -112,7 +122,7 @@
             </table>
         </div>
         <div class="pt-5">
-            {{ $categories->links() }}
+            {{ $products->links() }}
         </div>
     </div>
 @endsection
