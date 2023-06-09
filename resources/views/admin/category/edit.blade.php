@@ -2,7 +2,7 @@
 @section('title', 'Category')
 @section('content')
     <div class="container mx-auto p-5">
-        <h2 class="text-lg font-semibold text-gray-800 pb-5">Create Edit Form</h2>
+        <h2 class="text-xl font-semibold text-gray-800 pb-5">Category Update Form</h2>
 
         <form action="{{ url('/categories/' . $category->id) }}" method="POST">
             @csrf

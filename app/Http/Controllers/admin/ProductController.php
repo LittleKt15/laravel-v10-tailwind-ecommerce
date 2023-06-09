@@ -75,7 +75,9 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $user = Auth::user();
+        $product = Product::find($id);
+        return view('admin.product.show', compact('user', 'product'));
     }
 
     /**

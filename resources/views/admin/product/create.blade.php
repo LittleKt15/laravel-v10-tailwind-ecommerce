@@ -2,7 +2,7 @@
 @section('title', 'Product')
 @section('content')
     <div class="container mx-auto p-5">
-        <h2 class="text-lg font-semibold text-gray-800 pb-5">Product Create Form</h2>
+        <h2 class="text-xl font-semibold text-gray-800 pb-5">Product Create Form</h2>
 
         <form action="{{ url('/products') }}" method="POST" enctype="multipart/form-data">
             @csrf
