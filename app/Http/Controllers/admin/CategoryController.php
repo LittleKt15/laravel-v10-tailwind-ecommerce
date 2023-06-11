@@ -57,6 +57,15 @@ class CategoryController extends Controller
         //
     }
 
+    public function search(Request $request)
+    {
+        $user = Auth::user();
+        $searchData = "%" . $request->search_data . "%";
+        $categories = Category::where('name', 'like', $searchData)->paginate(5);
+
+        return view('admin.category.index', compact('categories', 'user'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      */

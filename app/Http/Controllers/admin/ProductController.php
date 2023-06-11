@@ -46,8 +46,8 @@ class ProductController extends Controller
             'color' => 'required',
             'size' => 'required',
             'description' => 'required',
-            'quantity' => 'required',
-            'price' => 'required',
+            'quantity' => 'required|integer|min:1|max:5',
+            'price' => 'required|integer|min:0',
             'image' => 'required|image|mimes:png,jpg,jpeg',
             'category_id' => 'required',
         ]);
@@ -80,6 +80,17 @@ class ProductController extends Controller
         return view('admin.product.show', compact('user', 'product'));
     }
 
+    public function search(Request $request)
+    {
+        $user = Auth::user();
+        $searchData = "%" . $request->search_data . "%";
+        $products = Product::where('name', 'like', $searchData)->orWhere('description', 'like', $searchData)->orWhere('price', 'like', $searchData)->orWhereHas('category', function($category) use ($searchData){
+            $category->where('name', 'like', $searchData);
+        })->paginate(5);
+
+        return view('admin.product.index', compact('products', 'user'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      */
@@ -101,8 +112,8 @@ class ProductController extends Controller
             'color' => 'required',
             'size' => 'required',
             'description' => 'required',
-            'quantity' => 'required',
-            'price' => 'required',
+            'quantity' => 'required|integer|min:1|max:5',
+            'price' => 'required|integer|min:0',
             'image' => 'nullable|image|mimes:png,jpg,jpeg',
             'category_id' => 'required',
         ]);

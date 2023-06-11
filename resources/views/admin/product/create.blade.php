@@ -53,7 +53,7 @@
                 <label for="description" class="block text-gray-700 font-bold mb-2">Description:</label>
                 <textarea id="description" name="description" rows="4"
                     class="form-input border rounded-md w-full py-2 px-3 text-gray-700 @error('description') bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 @enderror"
-                    placeholder="Enter description"></textarea>
+                    placeholder="Enter description">{{ old('description') }}</textarea>
                 @error('description')
                     <p class="text-red-500 text-xs italic">{{ $message }}</p>
                 @enderror

@@ -41,6 +41,15 @@ class RoleController extends Controller
         return redirect('/roles')->with('add', 'Role Updated!');
     }
 
+    public function search(Request $request)
+    {
+        $user = Auth::user();
+        $searchData = "%" . $request->search_data . "%";
+        $users = User::where('name', 'like', $searchData)->orWhere('email', 'like', $searchData)->orWhere('role', 'like', $searchData)->paginate(5);
+
+        return view('admin.role.index', compact('user', 'users'));
+    }
+
     public function destory($id)
     {
         User::find($id)->delete();

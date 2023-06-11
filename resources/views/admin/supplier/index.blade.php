@@ -1,12 +1,12 @@
 @extends('layouts.dashboard')
-@section('title', 'Category')
+@section('title', 'Supplier')
 @section('content')
     <div class="container mx-auto p-5">
         <div class="align-middle">
-            <span class="text-gray-700 text-xl font-semibold">Category List</span>
-            <a href="{{ url('categories/create') }}"
+            <span class="text-gray-700 text-xl font-semibold">Supplier List</span>
+            <a href="{{ url('suppliers/create') }}"
                 class="float-right py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75">Add
-                Category</a>
+                Supplier</a>
         </div>
 
         @if (Session('add'))
@@ -66,7 +66,7 @@
 
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-10 clear-both">
             <div class="pb-1 bg-white float-right">
-                <form class="flex items-center" action="{{ url('/search-categories') }}" method="GET">
+                <form class="flex items-center" action="" method="GET">
                     @csrf
                     <label for="simple-search" class="sr-only">Search</label>
                     <div class="relative w-full">
@@ -98,23 +98,31 @@
                     <tr>
                         <th scope="col" class="px-6 py-3">No.</th>
                         <th scope="col" class="px-6 py-3">Name</th>
+                        <th scope="col" class="px-6 py-3">Email</th>
+                        <th scope="col" class="px-6 py-3">Phone</th>
+                        <th scope="col" class="px-6 py-3">Company</th>
+                        <th scope="col" class="px-6 py-3">Address</th>
                         <th scope="col" class="px-6 py-3">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($categories as $index => $category)
+                    @foreach ($suppliers as $index => $supplier)
                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                             <th scope="row"
                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                {{ $index + $categories->firstItem() }}</th>
-                            <td class="px-6 py-4">{{ $category->name }}</td>
+                                {{ $index + $suppliers->firstItem() }}</th>
+                            <td class="px-6 py-4">{{ $supplier->name }}</td>
+                            <td class="px-6 py-4">{{ $supplier->email }}</td>
+                            <td class="px-6 py-4">{{ $supplier->phone }}</td>
+                            <td class="px-6 py-4">{{ $supplier->company }}</td>
+                            <td class="px-6 py-4">{{ $supplier->address }}</td>
                             <td class="px-6 py-4">
-                                <form action="{{ url('/categories/' . $category->id) }}" method="POST">
+                                <form action="{{ url('/suppliers/' . $supplier->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <div class="flex gap-4">
                                         <a x-data="{ tooltip: 'Edite' }"
-                                            href="{{ url('/categories/' . $category->id . '/edit') }}"
+                                            href="{{ url('/suppliers/' . $supplier->id . '/edit') }}"
                                             class="text-green-600">
                                             <svg fill="none" stroke="currentColor" stroke-width="1.5"
                                                 viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
@@ -142,7 +150,7 @@
             </table>
         </div>
         <div class="pt-5">
-            {{ $categories->links() }}
+            {{ $suppliers->links() }}
         </div>
     </div>
 @endsection

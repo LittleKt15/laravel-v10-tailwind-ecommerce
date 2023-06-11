@@ -3,7 +3,9 @@
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\ProductController;
+use App\Http\Controllers\admin\PurchaseController;
 use App\Http\Controllers\admin\RoleController;
+use App\Http\Controllers\admin\SupplierController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -41,12 +43,21 @@ Route::middleware('auth')->group(function () {
     Route::get('/index', [AdminController::class, 'index']);
 
     Route::resource('/categories', CategoryController::class);
+    Route::get('/search-categories', [CategoryController::class, 'search']);
+
     Route::resource('/products', ProductController::class);
+    Route::get('/search-products', [ProductController::class, 'search']);
+
+    Route::resource('/suppliers', SupplierController::class);
+
+    Route::resource('/purchases', PurchaseController::class);
+    Route::post('/purchases/status/{id}', [PurchaseController::class, 'statusUpdate']);
 
     Route::get('/roles', [RoleController::class, 'index']);
     Route::get('/roles/{id}/edit', [RoleController::class, 'edit']);
     Route::post('/roles/{id}', [RoleController::class, 'update']);
     Route::get('/roles/{id}', [RoleController::class, 'destory']);
+    Route::get('/search-roles', [RoleController::class, 'search']);
 });
 
 require __DIR__.'/auth.php';
