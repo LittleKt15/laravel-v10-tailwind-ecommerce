@@ -115,6 +115,6 @@ class PurchaseController extends Controller
             'status' => 'confirmed',
         ]);
 
-        return redirect('/purchases')->with('add', 'Status Updated!');
+        return redirect('/purchases')->with('add', 'Purchase Status Updated!');
     }
 }

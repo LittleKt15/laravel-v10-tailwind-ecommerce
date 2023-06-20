@@ -101,6 +101,7 @@
                         <th scope="col" class="px-6 py-3">Category</th>
                         <th scope="col" class="px-6 py-3">Description</th>
                         <th scope="col" class="px-6 py-3">Image</th>
+                        <th scope="col" class="px-6 py-3">Quantity</th>
                         <th scope="col" class="px-6 py-3">Price</th>
                         <th scope="col" class="px-6 py-3">Action</th>
                     </tr>
@@ -118,6 +119,7 @@
                                 <img src="{{ asset('storage/product-images/' . $product->image) }}" alt=""
                                     width="100px">
                             </td>
+                            <td class="px-6 py-4">{{ $product->quantity }}</td>
                             <td class="px-6 py-4">{{ $product->price }}$</td>
                             <td class="px-6 py-4">
                                 <form action="{{ url('/products/' . $product->id) }}" method="POST">

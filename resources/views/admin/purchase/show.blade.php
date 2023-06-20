@@ -15,24 +15,24 @@
                 <h5 class="text-3xl text-center pb-2 font-semibold tracking-tight text-gray-900 dark:text-white">
                     {{ $purchase->product->name }}
                 </h5>
-                <p class="text-lg font-semibold text-gray-900 dark:text-white">Purchaser: {{ $purchase->name }}</p>
-                <p class="text-lg font-semibold text-gray-900 dark:text-white">Category:
+                <p class="text-lg font-semibold text-gray-900 dark:text-gray-400 p-1">Purchaser: {{ $purchase->name }}</p>
+                <p class="text-lg font-semibold text-gray-900 dark:text-gray-400 p-1">Category:
                     {{ $purchase->product->category->name }}</p>
-                <p class="text-lg font-semibold text-gray-900 dark:text-white">Supplier's Name:
+                <p class="text-lg font-semibold text-gray-900 dark:text-gray-400 p-1">Supplier's Name:
                     {{ $purchase->supplier->name }}</p>
-                <p class="text-lg font-semibold text-gray-900 dark:text-white">Purchased Quantity: {{ $purchase->quantity }}
+                <p class="text-lg font-semibold text-gray-900 dark:text-gray-400 p-1">Purchased Quantity: {{ $purchase->quantity }}
                 </p>
-                <p class="text-lg font-semibold text-gray-900 dark:text-white">Amount: {{ $purchase->amount }}$</p>
-                <p class="text-lg font-semibold text-gray-900 dark:text-white">Value-Added Tax: {{ $purchase->vat }}$</p>
-                <p class="text-lg font-semibold text-gray-900 dark:text-white">Total Amount:
+                <p class="text-lg font-semibold text-gray-900 dark:text-gray-400 p-1">Amount: {{ $purchase->amount }}$</p>
+                <p class="text-lg font-semibold text-gray-900 dark:text-gray-400 p-1">Value-Added Tax: {{ $purchase->vat }}$</p>
+                <p class="text-lg font-semibold text-gray-900 dark:text-gray-400 p-1">Total Amount:
                     {{ $purchase->amount * $purchase->quantity }}$</p>
-                <p class="text-lg font-semibold text-gray-900 dark:text-white">Status: @if ($purchase->status === 'pending')
+                <p class="text-lg font-semibold text-gray-900 dark:text-gray-400 p-1">Status: @if ($purchase->status === 'pending')
                         <span class="text-red-500 capitalize">{{ $purchase->status }}</span>
                     @else
                         <span class="text-green-500 capitalize">{{ $purchase->status }}</span>
                     @endif
                 </p>
-                <div class="flex items-center justify-between">
+                <div class="flex items-center justify-between p-1">
                     <span class="text-xl font-bold text-gray-900 dark:text-white">Grand Total:
                         {{ $purchase->grandtotal }}$</span>
                     <form action="{{ url('/purchases/status/' . $purchase->id) }}" method="POST">
