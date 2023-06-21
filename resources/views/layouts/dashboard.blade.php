@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     {{-- TailwindCSS Link --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -28,9 +29,9 @@
                             </path>
                         </svg>
                     </button>
-                    <a href="{{ url('/index') }}" class="flex ml-2 md:mr-24">
+                    <a href="{{ url('/dashboards') }}" class="flex ml-2 md:mr-24">
                         <img src="https://m.media-amazon.com/images/S/aplus-media/sc/0a86c50b-5b09-454d-9e0e-4acaf4ad1c40.__CR0,0,500,500_PT0_SX300_V1___.jpg"
-                            class="h-8 mr-3" alt="FlowBite Logo" />
+                            class="h-8 mr-3" alt="E-shirts Logo" />
                         <span
                             class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">E-shirts</span>
                     </a>
@@ -61,7 +62,7 @@
                                 <form action="{{ route('logout') }}" method="post">
                                     @csrf
                                     <li>
-                                        <a href="{{ url('/index') }}"
+                                        <a href="{{ url('/dashboards') }}"
                                             class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                                             role="menuitem">Dashboard</a>
                                     </li>
@@ -90,7 +91,7 @@
         <div class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
             <ul class="space-y-2 font-medium">
                 <li>
-                    <a href="{{ url('/index') }}"
+                    <a href="{{ url('/dashboards') }}"
                         class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                         <svg aria-hidden="true"
                             class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
