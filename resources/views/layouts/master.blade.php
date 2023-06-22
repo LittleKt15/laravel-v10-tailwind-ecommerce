@@ -21,11 +21,23 @@
                 <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">E-shirts</span>
             </a>
             <div class="flex md:order-2">
-                <a href="{{ route('login') }}"
-                    class="text-white font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login</a>
-                <a href="{{ route('register') }}"
-                    class="text-white font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 md:ms-2">Sign
-                    Up</a>
+                @if (Route::has('login'))
+                    @auth
+                        <form action="{{ route('logout') }}" method="post">
+                            @csrf
+                            <a href="#"
+                                class="text-white font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0">{{ $user->name }}</a>
+                            <button onclick="return confirm('Are you sure you want to logout?')"
+                                class="text-white font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Logout</button>
+                        </form>
+                    @else
+                        <a href="{{ route('login') }}"
+                            class="text-white font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login</a>
+                        <a href="{{ route('register') }}"
+                            class="text-white font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 md:ms-2">Sign
+                            Up</a>
+                    @endauth
+                @endif
                 <button data-collapse-toggle="navbar-sticky" type="button"
                     class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                     aria-controls="navbar-sticky" aria-expanded="false">
@@ -92,8 +104,13 @@
                 </ul>
             </div>
             <hr class="my-6 sm:mx-auto dark:border-gray-700 lg:my-8" />
-            <span class="block text-sm sm:text-center dark:text-gray-400">&copy; 2023 <a href="#"
-                    class="hover:underline">Copyright</a>. All Rights Reserved.</span>
+            <span class="block text-sm sm:text-center dark:text-gray-400">&copy;
+                <script>
+                    document.write(new Date().getFullYear());
+                </script>
+                <a href="#" class="hover:underline">Copyright</a>
+                . All Rights Reserved.
+            </span>
         </div>
     </footer>
 

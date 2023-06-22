@@ -26,7 +26,7 @@ class RedirectIfAuthenticated
         // }
         if(Auth::guard($guard)->check()) {
             if(Auth::user()->role === 'admin'){
-                return redirect('/index');
+                return redirect('/');
             }
             return redirect(RouteServiceProvider::HOME);
         }
