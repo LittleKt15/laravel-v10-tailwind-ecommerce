@@ -24,7 +24,7 @@
                 @if (Route::has('login'))
                     @auth
                         <div class="md:me-3">
-                            <a href="#" id="dropdownNavbarLink" data-dropdown-toggle="cart"
+                            <button id="dropdownNavbarLink" data-dropdown-toggle="cart"
                                 class="flex items-center p-2 text-gray-900 relative rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                                 <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
                                     class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
@@ -37,7 +37,7 @@
                                 <div
                                     class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -right-2 dark:border-gray-900">
                                     20</div>
-                            </a>
+                            </button>
                             <div id="cart"
                                 class="z-10 hidden font-normal divide-y rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
                                 <ul class="py-2 text-sm text-gray-700 dark:text-gray-400"
@@ -61,7 +61,7 @@
                                 <p class="text-sm text-gray-900 dark:text-white" role="none">
                                     {{ $user->name }} ({{ $user->role }})
                                 </p>
-                                <p class="text-xs font-medium text-gray-900 truncate dark:text-gray-300" role="none">
+                                <p class="text-sm font-medium text-gray-900 truncate dark:text-gray-300" role="none">
                                     {{ $user->email }}
                                 </p>
                             </div>
@@ -170,7 +170,7 @@
         </div>
     </nav>
 
-    <div class="container mx-auto pt-20 py-5">
+    <div class="container mx-auto pt-20 md:pt-0 pb-5">
         @yield('content')
     </div>
 
