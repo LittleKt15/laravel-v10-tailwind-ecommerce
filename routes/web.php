@@ -7,6 +7,7 @@ use App\Http\Controllers\admin\PurchaseController;
 use App\Http\Controllers\admin\RoleController;
 use App\Http\Controllers\admin\SupplierController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\user\CartController;
 use App\Http\Controllers\user\IndexController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +25,7 @@ use Inertia\Inertia;
 */
 
 Route::get('/', [IndexController::class, 'index']);
+Route::get('/cart', [CartController::class, 'index']);
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

@@ -47,6 +47,11 @@
                                             class="block px-4 py-2 dark:hover:bg-gray-600 dark:hover:text-white">Adidas</a>
                                     </li>
                                 </ul>
+                                <div role="none">
+                                    <a href="{{ url('/cart') }}" class="block text-sm text-gray-900 dark:text-white dark:hover:bg-gray-600 hover:rounded-lg px-4 py-3 w-full" role="none">
+                                        Edit Cart
+                                    </a>
+                                </div>
                             </div>
                         </div>
                         <button id="dropdownNavbarLink" data-dropdown-toggle="user"
@@ -170,9 +175,7 @@
         </div>
     </nav>
 
-    <div class="container mx-auto pt-20 md:pt-0 pb-5">
-        @yield('content')
-    </div>
+    @yield('content')
 
     <footer class="bg-white shadow dark:bg-gray-900 w-full">
         <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8">
