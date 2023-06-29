@@ -12,7 +12,7 @@
     <title>@yield('title')</title>
 </head>
 
-<body class="bg-gray-200">
+<body class="bg-gray-200 h-screen relative">
     <nav class="dark:bg-gray-900 fixed w-full z-20 top-0 left-0 border-b dark:border-gray-600 z-50">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
             <a href="{{ url('/') }}" class="flex items-center">
@@ -48,7 +48,7 @@
                                     </li>
                                 </ul>
                                 <div role="none">
-                                    <a href="{{ url('/cart') }}" class="block text-sm text-gray-900 dark:text-white dark:hover:bg-gray-600 hover:rounded-lg px-4 py-3 w-full" role="none">
+                                    <a href="{{ url('/carts') }}" class="block text-sm text-gray-900 dark:text-white dark:hover:bg-gray-600 hover:rounded-lg px-4 py-3 w-full" role="none">
                                         Edit Cart
                                     </a>
                                 </div>
@@ -177,7 +177,7 @@
 
     @yield('content')
 
-    <footer class="bg-white shadow dark:bg-gray-900 w-full">
+    <footer class="bg-white shadow dark:bg-gray-900 w-full sticky top-full">
         <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8">
             <div class="sm:flex sm:items-center sm:justify-between">
                 <a href="{{ url('/') }}" class="flex items-center mb-4 sm:mb-0">
@@ -211,8 +211,6 @@
             </span>
         </div>
     </footer>
-
-
 
 </body>
 
