@@ -10,11 +10,16 @@ use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $user = Auth::user();
         $categories = Category::all();
-        $carts = Cart::all();
+        $carts = Cart::where('user_id', $user->id)->paginate(50);
         return view('user.cart', compact('user', 'categories', 'carts'));
     }
 
@@ -23,8 +28,16 @@ class CartController extends Controller
         $cart = new Cart();
         $cart->product_id = $request->input('product_id');
         $cart->user_id = Auth::user()->id;
+        $cart->status = "Added to Cart";
         $cart->save();
 
         return back();
+    }
+
+    public function delete(string $id)
+    {
+        Cart::find($id)->delete();
+
+        return back()->with('del', 'Cart Deleted!');
     }
 }

@@ -36,19 +36,23 @@
                                 <span class="sr-only">Notifications</span>
                                 <div
                                     class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -right-2 dark:border-gray-900">
-                                    20</div>
+                                    {{ $carts->count() }}</div>
                             </button>
                             <div id="cart"
                                 class="z-10 hidden font-normal divide-y rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
                                 <ul class="py-2 text-sm text-gray-700 dark:text-gray-400"
                                     aria-labelledby="dropdownLargeButton">
-                                    <li>
-                                        <a href="#"
-                                            class="block px-4 py-2 dark:hover:bg-gray-600 dark:hover:text-white">Adidas</a>
-                                    </li>
+                                    @foreach ($carts as $cart)
+                                        <li>
+                                            <a href="#"
+                                                class="block px-4 py-2 dark:hover:bg-gray-600 dark:hover:text-white">{{ $cart->product->name }}</a>
+                                        </li>
+                                    @endforeach
                                 </ul>
                                 <div role="none">
-                                    <a href="{{ url('/carts') }}" class="block text-sm text-gray-900 dark:text-white dark:hover:bg-gray-600 hover:rounded-lg px-4 py-3 w-full" role="none">
+                                    <a href="{{ url('/carts') }}"
+                                        class="block text-sm text-gray-900 dark:text-white dark:hover:bg-gray-600 hover:rounded-lg px-4 py-3 w-full"
+                                        role="none">
                                         Edit Cart
                                     </a>
                                 </div>

@@ -27,6 +27,7 @@ use Inertia\Inertia;
 Route::get('/', [IndexController::class, 'index']);
 Route::get('/carts', [CartController::class, 'index']);
 Route::post('/carts/create', [CartController::class, 'cart']);
+Route::get('/carts/delete/{id}', [CartController::class, 'delete']);
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

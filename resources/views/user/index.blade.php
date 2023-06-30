@@ -111,16 +111,41 @@
                                 <form action="{{ url('carts/create') }}" method="POST" class="inline-block">
                                     @csrf
                                     <input type="number" name="product_id" class="hidden" value="{{ $product->id }}">
-                                    <button
-                                        class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                        Add to Cart
-                                        <svg fill="none" class="w-4 h-4 ml-2 -mr-1" stroke="currentColor" stroke-width="1.5"
-                                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z">
-                                            </path>
-                                        </svg>
-                                    </button>
+                                    @php
+                                        $addedToCart = false;
+                                        foreach ($carts as $cart) {
+                                            if ($cart->status == 'Added to Cart' && $cart->product_id === $product->id) {
+                                                $addedToCart = true;
+                                                break;
+                                            }
+                                        }
+                                    @endphp
+                                    @if ($addedToCart)
+                                        <button
+                                            class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg"
+                                            disabled>
+                                            Added to Cart
+                                            <svg fill="none" class="w-4 h-4 ml-2 -mr-1" stroke="currentColor"
+                                                stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                                                aria-hidden="true">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z">
+                                                </path>
+                                            </svg>
+                                        </button>
+                                    @else
+                                        <button
+                                            class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                            Add to Cart
+                                            <svg fill="none" class="w-4 h-4 ml-2 -mr-1" stroke="currentColor"
+                                                stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                                                aria-hidden="true">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z">
+                                                </path>
+                                            </svg>
+                                        </button>
+                                    @endif
                                 </form>
                             @endauth
                             @if ($user)
