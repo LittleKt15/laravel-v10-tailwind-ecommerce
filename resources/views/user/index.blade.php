@@ -122,9 +122,9 @@
                                     @endphp
                                     @if ($addedToCart)
                                         <button
-                                            class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg"
+                                            class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-yellow-700 rounded-lg"
                                             disabled>
-                                            Added to Cart
+                                            Already in Cart
                                             <svg fill="none" class="w-4 h-4 ml-2 -mr-1" stroke="currentColor"
                                                 stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
                                                 aria-hidden="true">

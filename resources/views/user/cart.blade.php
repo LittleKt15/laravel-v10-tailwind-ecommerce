@@ -94,7 +94,7 @@
                                         </svg>
                                         View
                                     </a>
-                                    <a href="{{ url('carts/delete/' . $cart->id) }}"
+                                    <a href="{{ url('carts/delete/' . $cart->id) }}" onclick="return confirm('Are you sure you want to delete?')"
                                         class="font-medium dark:text-red-600 hover:underline">
                                         <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
                                             aria-hidden="true" class="w-6">
