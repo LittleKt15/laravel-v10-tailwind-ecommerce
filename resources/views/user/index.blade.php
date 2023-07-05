@@ -177,4 +177,21 @@
             </div>
         </div>
     </div>
+
+    <div class="container py-7 mx-auto px-4">
+        <h1 class="text-center font-bold text-3xl pb-5">Availabel Products</h1>
+        <hr class="block m-auto bg-gray-900 h-1 w-5/6 rounded mb-5">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            @foreach ($products as $product)
+                <div class="grid gap-4">
+                    <div>
+                        <a href="#">
+                            <img class="h-auto max-w-full rounded-lg"
+                            src="{{ asset('storage/product-images/' . $product->image) }}" alt="">
+                        </a>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
 @endsection
