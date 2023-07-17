@@ -84,7 +84,8 @@
                             </td>
                             <td class="px-6 py-4">
                                 <div class="flex gap-4">
-                                    <a href="#" class="font-medium dark:text-blue-600 hover:underline">
+                                    <a href="{{ url('/carts/' . $cart->product->id) }}"
+                                        class="font-medium dark:text-blue-600 hover:underline">
                                         <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
                                             aria-hidden="true" class="w-6">
                                             <path d="M10 12.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z"></path>
@@ -94,7 +95,8 @@
                                         </svg>
                                         View
                                     </a>
-                                    <a href="{{ url('carts/delete/' . $cart->id) }}" onclick="return confirm('Are you sure you want to delete?')"
+                                    <a href="{{ url('carts/delete/' . $cart->id) }}"
+                                        onclick="return confirm('Are you sure you want to delete?')"
                                         class="font-medium dark:text-red-600 hover:underline">
                                         <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
                                             aria-hidden="true" class="w-6">

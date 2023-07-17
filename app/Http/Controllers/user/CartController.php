@@ -5,6 +5,7 @@ namespace App\Http\Controllers\user;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -32,6 +33,15 @@ class CartController extends Controller
         $cart->save();
 
         return back();
+    }
+
+    public function detail($id)
+    {
+        $user = Auth::user();
+        $carts = Cart::where('user_id', $user->id)->paginate(50);
+        $product = Product::find($id);
+        $categories = Category::all();
+        return view('user.detail', compact('user', 'product', 'carts', 'categories'));
     }
 
     public function delete(string $id)
