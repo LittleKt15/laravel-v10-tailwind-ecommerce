@@ -84,7 +84,7 @@
                             </td>
                             <td class="px-6 py-4">
                                 <div class="flex gap-4">
-                                    <a href="{{ url('/carts/' . $cart->product->id) }}"
+                                    <a href="{{ url('/products/' . $cart->product->id) }}"
                                         class="font-medium dark:text-blue-600 hover:underline">
                                         <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
                                             aria-hidden="true" class="w-6">

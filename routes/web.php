@@ -8,6 +8,7 @@ use App\Http\Controllers\admin\RoleController;
 use App\Http\Controllers\admin\SupplierController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\user\CartController;
+use App\Http\Controllers\user\CheckoutController;
 use App\Http\Controllers\user\IndexController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -27,7 +28,8 @@ use Inertia\Inertia;
 Route::get('/', [IndexController::class, 'index']);
 Route::get('/carts', [CartController::class, 'index']);
 Route::post('/carts/create', [CartController::class, 'cart']);
-Route::get('/carts/{id}', [CartController::class, 'detail']);
+Route::get('/products/{id}', [CartController::class, 'detail']);
+Route::get('/checkouts/{id}', [CheckoutController::class, 'index']);
 Route::get('/carts/delete/{id}', [CartController::class, 'delete']);
 
 Route::get('/dashboard', function () {

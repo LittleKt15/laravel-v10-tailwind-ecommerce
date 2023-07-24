@@ -10,6 +10,9 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <title>@yield('title')</title>
+
+    @yield('css')
+    @yield('headerscript')
 </head>
 
 <body class="bg-gray-200 h-screen relative">
@@ -44,7 +47,7 @@
                                     aria-labelledby="dropdownLargeButton">
                                     @foreach ($carts as $cart)
                                         <li>
-                                            <a href="{{ url('/carts/' . $cart->product->id) }}"
+                                            <a href="{{ url('/products/' . $cart->product->id) }}"
                                                 class="block px-4 py-2 dark:hover:bg-gray-600 dark:hover:text-white">{{ $cart->product->name }}</a>
                                         </li>
                                     @endforeach
@@ -216,6 +219,7 @@
         </div>
     </footer>
 
+    @yield('bodyscript')
 </body>
 
 </html>
