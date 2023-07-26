@@ -24,4 +24,9 @@ class CheckoutController extends Controller
         $product = Product::find($id);
         return view('user.checkout', compact('user', 'carts', 'categories', 'product'));
     }
+
+    public function checkout()
+    {
+
+    }
 }
