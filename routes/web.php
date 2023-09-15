@@ -28,7 +28,7 @@ use Inertia\Inertia;
 Route::get('/', [IndexController::class, 'index']);
 Route::get('/carts', [CartController::class, 'index']);
 Route::post('/carts/create', [CartController::class, 'cart']);
-Route::get('/products/{id}', [CartController::class, 'detail']);
+Route::get('/product-details/{id}', [CartController::class, 'detail']);
 Route::get('/carts/delete/{id}', [CartController::class, 'delete']);
 Route::get('/checkouts/{id}', [CheckoutController::class, 'index']);
 Route::post('/checkouts', [CheckoutController::class, 'checkout']);

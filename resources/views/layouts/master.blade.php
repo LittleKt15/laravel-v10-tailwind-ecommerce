@@ -47,7 +47,7 @@
                                     aria-labelledby="dropdownLargeButton">
                                     @foreach ($carts as $cart)
                                         <li>
-                                            <a href="{{ url('/products/' . $cart->product->id) }}"
+                                            <a href="{{ url('/product-details/' . $cart->product->id) }}"
                                                 class="block px-4 py-2 dark:hover:bg-gray-600 dark:hover:text-white">{{ $cart->product->name }}</a>
                                         </li>
                                     @endforeach
