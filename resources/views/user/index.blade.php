@@ -60,6 +60,7 @@
         </a>
     </div>
 
+    {{-- Shop By Category --}}
     <div class="py-7">
         <h1 class="text-center font-bold text-3xl pb-5">Shop By Category</h1>
         <hr class="block m-auto bg-gray-900 h-1 w-5/6 rounded">
@@ -82,6 +83,7 @@
         </div>
     </div>
 
+    {{-- Latest Products --}}
     <div class="py-7">
         <h1 class="text-center font-bold text-3xl pb-5">Latest Products</h1>
         <hr class="block m-auto bg-gray-900 h-1 w-5/6 rounded">
@@ -122,9 +124,9 @@
                                     @endphp
                                     @if ($addedToCart)
                                         <button
-                                            class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-yellow-700 rounded-lg"
+                                            class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white {{ $product->quantity === 0 ? 'bg-red-500' : 'bg-yellow-700' }} rounded-lg"
                                             disabled>
-                                            Already in Cart
+                                            {{ $product->quantity === 0 ? 'Out of Stcok' : 'Already in cart' }}
                                             <svg fill="none" class="w-4 h-4 ml-2 -mr-1" stroke="currentColor"
                                                 stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
                                                 aria-hidden="true">
@@ -178,6 +180,7 @@
         </div>
     </div>
 
+    {{-- Availabel Products --}}
     <div class="container py-7 mx-auto px-4">
         <h1 class="text-center font-bold text-3xl pb-5">Availabel Products</h1>
         <hr class="block m-auto bg-gray-900 h-1 w-5/6 rounded mb-5">

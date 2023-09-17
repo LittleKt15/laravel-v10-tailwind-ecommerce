@@ -25,8 +25,19 @@ class CheckoutController extends Controller
         return view('user.checkout', compact('user', 'carts', 'categories', 'product'));
     }
 
-    public function checkout()
+    public function checkout(Request $request)
     {
-
+        $request->validate([
+            'phone' => 'required',
+            'address' => 'required',
+            'direction' => 'required',
+            'card_no' => 'required',
+            'exp_date' => 'required',
+            'cvv' => 'required',
+            'total_quantity' => 'required',
+            'total_amount' => 'required',
+            'vat' => 'required',
+            'grand_total' => 'required',
+        ]);
     }
 }
