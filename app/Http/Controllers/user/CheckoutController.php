@@ -5,6 +5,7 @@ namespace App\Http\Controllers\user;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\Category;
+use App\Models\Checkout;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -27,6 +28,7 @@ class CheckoutController extends Controller
 
     public function checkout(Request $request)
     {
+
         $request->validate([
             'phone' => 'required',
             'address' => 'required',
@@ -39,5 +41,27 @@ class CheckoutController extends Controller
             'vat' => 'required',
             'grand_total' => 'required',
         ]);
+
+        $checkout = new Checkout;
+        $checkout->phone = request()->phone;
+        $checkout->address = request()->address;
+        $checkout->direction = request()->direction;
+        $checkout->card_no = request()->card_no;
+        $checkout->exp_date = request()->exp_date;
+        $checkout->cvv = request()->cvv;
+
+        $checkout->total_quantity = request()->total_quantity;
+
+        $checkout->total_amount = request()->total_quantity * $checkout->product->price;
+
+        $checkout->vat = 0.05;
+
+        $checkout->grand_total = request()->total_amount * 0.05;
+
+        $checkout->user_id = auth()->user()->id;
+        $checkout->product_id = request()->product_id;
+        $checkout->save();
+
+        return redirect('/index')->with('', '');
     }
 }
