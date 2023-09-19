@@ -7,6 +7,7 @@ use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Checkout;
 use App\Models\Product;
+use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,7 +29,6 @@ class CheckoutController extends Controller
 
     public function checkout(Request $request)
     {
-
         $request->validate([
             'phone' => 'required',
             'address' => 'required',
@@ -36,7 +36,7 @@ class CheckoutController extends Controller
             'card_no' => 'required',
             'exp_date' => 'required',
             'cvv' => 'required',
-            'total_quantity' => 'required',
+            'total_quantity' => 'required|integer|min:1',
             'total_amount' => 'required',
             'vat' => 'required',
             'grand_total' => 'required',
@@ -52,7 +52,7 @@ class CheckoutController extends Controller
 
         $checkout->total_quantity = request()->total_quantity;
 
-        $checkout->total_amount = request()->total_quantity * $checkout->product->price;
+        $checkout->total_amount = request()->total_amount;
 
         $checkout->vat = 0.05;
 

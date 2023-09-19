@@ -23,7 +23,7 @@ return new class extends Migration
             $table->integer('vat');
             $table->integer('total_amount');
             $table->integer('grand_total');
-            $table->string('status');
+            $table->string('status')->default('pending');
             $table->integer('user_id');
             $table->integer('product_id');
             $table->timestamps();

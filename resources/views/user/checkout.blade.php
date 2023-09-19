@@ -27,8 +27,8 @@
                     <div class="pb-3">
                         <label for="message"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Address</label>
-                        <textarea id="message" rows="4" name="address" placeholder="Enter your address" value="{{ old('address') }}"
-                            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 @error('address') bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 @enderror"></textarea>
+                        <textarea id="message" rows="4" name="address" placeholder="Enter your address"
+                            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 @error('address') bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 @enderror">{{ old('address') }}</textarea>
                         @error('address')
                             <p class="text-red-500 text-xs italic">{{ $message }}</p>
                         @enderror
