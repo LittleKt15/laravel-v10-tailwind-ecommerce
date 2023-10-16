@@ -7,7 +7,6 @@ use App\Models\Product;
 use App\Models\Purchase;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class PurchaseController extends Controller
 {
@@ -21,9 +20,8 @@ class PurchaseController extends Controller
 
     public function index()
     {
-        $user = Auth::user();
         $purchases = Purchase::paginate(5);
-        return view('admin.purchase.index', compact('user', 'purchases'));
+        return view('admin.purchase.index', compact('purchases'));
     }
 
     /**
@@ -31,10 +29,9 @@ class PurchaseController extends Controller
      */
     public function create()
     {
-        $user = Auth::user();
         $products = Product::all();
         $suppliers = Supplier::all();
-        return view('admin.purchase.create', compact('user', 'products', 'suppliers'));
+        return view('admin.purchase.create', compact('products', 'suppliers'));
     }
 
     /**
@@ -52,7 +49,7 @@ class PurchaseController extends Controller
         ]);
 
         Purchase::create([
-            'name' => Auth::user()->name,
+            'name' => auth()->user()->name,
             'product_id' => $request->product_id,
             'supplier_id' => $request->supplier_id,
             'quantity' => $request->quantity,
@@ -69,9 +66,8 @@ class PurchaseController extends Controller
      */
     public function show(string $id)
     {
-        $user = Auth::user();
         $purchase = Purchase::find($id);
-        return view('admin.purchase.show', compact('user', 'purchase'));
+        return view('admin.purchase.show', compact('purchase'));
     }
 
     /**

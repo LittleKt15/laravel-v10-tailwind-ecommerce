@@ -5,7 +5,6 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class RoleController extends Controller
 {
@@ -16,16 +15,14 @@ class RoleController extends Controller
 
     public function index()
     {
-        $user = Auth::user();
         $users = User::paginate(5);
-        return view('admin.role.index', compact('user', 'users'));
+        return view('admin.role.index', compact('users'));
     }
 
     public function edit($id)
     {
-        $user = Auth::user();
         $users = User::find($id);
-        return view('admin.role.edit', compact('user', 'users'));
+        return view('admin.role.edit', compact('users'));
     }
 
     public function update(Request $request, $id)
@@ -43,11 +40,10 @@ class RoleController extends Controller
 
     public function search(Request $request)
     {
-        $user = Auth::user();
         $searchData = "%" . $request->search_data . "%";
         $users = User::where('name', 'like', $searchData)->orWhere('email', 'like', $searchData)->orWhere('role', 'like', $searchData)->paginate(5);
 
-        return view('admin.role.index', compact('user', 'users'));
+        return view('admin.role.index', compact('users'));
     }
 
     public function destory($id)

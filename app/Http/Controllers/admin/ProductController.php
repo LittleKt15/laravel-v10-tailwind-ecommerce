@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 
 class ProductController extends Controller
@@ -22,8 +21,7 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::paginate(5);
-        $user = Auth::user();
-        return view('admin.product.index', compact('products', 'user'));
+        return view('admin.product.index', compact('products'));
     }
 
     /**
@@ -32,8 +30,7 @@ class ProductController extends Controller
     public function create()
     {
         $categories = Category::all();
-        $user = Auth::user();
-        return view('admin.product.create', compact('categories', 'user'));
+        return view('admin.product.create', compact('categories'));
     }
 
     /**
@@ -75,20 +72,18 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-        $user = Auth::user();
         $product = Product::find($id);
-        return view('admin.product.show', compact('user', 'product'));
+        return view('admin.product.show', compact('product'));
     }
 
     public function search(Request $request)
     {
-        $user = Auth::user();
         $searchData = "%" . $request->search_data . "%";
         $products = Product::where('name', 'like', $searchData)->orWhere('description', 'like', $searchData)->orWhere('price', 'like', $searchData)->orWhereHas('category', function($category) use ($searchData){
             $category->where('name', 'like', $searchData);
         })->paginate(5);
 
-        return view('admin.product.index', compact('products', 'user'));
+        return view('admin.product.index', compact('products'));
     }
 
     /**
@@ -98,8 +93,7 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $categories = Category::all();
-        $user = Auth::user();
-        return view('admin.product.edit', compact('product', 'categories', 'user'));
+        return view('admin.product.edit', compact('product', 'categories'));
     }
 
     /**

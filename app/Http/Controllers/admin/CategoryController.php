@@ -5,7 +5,6 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
@@ -20,8 +19,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::paginate(5);
-        $user = Auth::user();
-        return view('admin.category.index', compact('categories', 'user'));
+        return view('admin.category.index', compact('categories'));
     }
 
     /**
@@ -29,8 +27,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $user = Auth::user();
-        return view('admin.category.create', compact('user'));
+        return view('admin.category.create');
     }
 
     /**
@@ -59,11 +56,10 @@ class CategoryController extends Controller
 
     public function search(Request $request)
     {
-        $user = Auth::user();
         $searchData = "%" . $request->search_data . "%";
         $categories = Category::where('name', 'like', $searchData)->paginate(5);
 
-        return view('admin.category.index', compact('categories', 'user'));
+        return view('admin.category.index', compact('categories'));
     }
 
     /**
@@ -72,8 +68,7 @@ class CategoryController extends Controller
     public function edit(string $id)
     {
         $category = Category::find($id);
-        $user = Auth::user();
-        return view('admin.category.edit', compact('category', 'user'));
+        return view('admin.category.edit', compact('category'));
     }
 
     /**

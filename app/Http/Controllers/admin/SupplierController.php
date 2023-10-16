@@ -5,7 +5,6 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class SupplierController extends Controller
 {
@@ -19,9 +18,8 @@ class SupplierController extends Controller
 
     public function index()
     {
-        $user = Auth::user();
         $suppliers = Supplier::paginate(5);
-        return view('admin.supplier.index', compact('user', 'suppliers'));
+        return view('admin.supplier.index', compact('suppliers'));
     }
 
     /**
@@ -29,8 +27,7 @@ class SupplierController extends Controller
      */
     public function create()
     {
-        $user = Auth::user();
-        return view('admin.supplier.create', compact('user'));
+        return view('admin.supplier.create');
     }
 
     /**
@@ -70,9 +67,8 @@ class SupplierController extends Controller
      */
     public function edit(string $id)
     {
-        $user = Auth::user();
         $supplier = Supplier::find($id);
-        return view('admin.supplier.edit', compact('user', 'supplier'));
+        return view('admin.supplier.edit', compact('supplier'));
     }
 
     /**

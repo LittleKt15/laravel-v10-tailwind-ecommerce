@@ -7,7 +7,6 @@ use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
@@ -18,17 +17,17 @@ class CartController extends Controller
 
     public function index()
     {
-        $user = Auth::user();
         $categories = Category::all();
-        $carts = Cart::where('user_id', $user->id)->paginate(50);
-        return view('user.cart', compact('user', 'categories', 'carts'));
+        // $carts = Cart::where('user_id', $user->id)->paginate(50);
+        $carts = Cart::where('user_id', auth()->user()->id)->paginate(50);
+        return view('user.cart', compact('categories', 'carts'));
     }
 
     public function cart(Request $request)
     {
         $cart = new Cart();
         $cart->product_id = $request->input('product_id');
-        $cart->user_id = Auth::user()->id;
+        $cart->user_id = auth()->user()->id;
         $cart->status = "Added to Cart";
         $cart->save();
 
@@ -37,11 +36,10 @@ class CartController extends Controller
 
     public function detail($id)
     {
-        $user = Auth::user();
-        $carts = Cart::where('user_id', $user->id)->paginate(50);
+        $carts = Cart::where('user_id', auth()->user()->id)->paginate(50);
         $product = Product::find($id);
         $categories = Category::all();
-        return view('user.detail', compact('user', 'product', 'carts', 'categories'));
+        return view('user.detail', compact('product', 'carts', 'categories'));
     }
 
     public function delete(string $id)
