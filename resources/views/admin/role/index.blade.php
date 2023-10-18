@@ -112,7 +112,7 @@
                             <td class="px-6 py-4">
 
                                 <div class="flex gap-4">
-                                    <a x-data="{ tooltip: 'Edite' }" href="{{ url('/roles/' . $user->id . '/edit') }}"
+                                    <a x-data="{ tooltip: 'Edite' }" href="{{ url('/admin/roles/' . $user->id . '/edit') }}"
                                         class="text-green-600">
                                         <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
                                             xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -121,7 +121,8 @@
                                             </path>
                                         </svg> Edit
                                     </a>
-                                    <a x-data="{ tooltip: 'Delete' }" class="text-red-600" href="{{ url('/roles/' . $user->id) }}"
+                                    <a x-data="{ tooltip: 'Delete' }" class="text-red-600"
+                                        href="{{ url('/admin/roles/' . $user->id) }}"
                                         onclick="return confirm('Are you sure you want to delete?')">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                             stroke-width="1.5" stroke="currentColor" class="h-6 w-6"

@@ -11,14 +11,12 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function __construct()
-    {
-        $this->middleware('isAdmin');
-    }
-
     public function index()
     {
-        $categories = Category::paginate(5);
+        $categories = Category::when(request('search'), function ($category) {
+            $category->where('name', 'like', '%' . request('search') . '%');
+        })->orderBy('id', 'desc')->paginate(5);
+
         return view('admin.category.index', compact('categories'));
     }
 
@@ -27,7 +25,9 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.category.create');
+        return view('admin.category.create-edit', [
+            'category' => new Category(),
+        ]);
     }
 
     /**
@@ -43,56 +43,39 @@ class CategoryController extends Controller
             'name' => $request->name,
         ]);
 
-        return redirect('/categories')->with('add', 'Categories Created!');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    public function search(Request $request)
-    {
-        $searchData = "%" . $request->search_data . "%";
-        $categories = Category::where('name', 'like', $searchData)->paginate(5);
-
-        return view('admin.category.index', compact('categories'));
+        return redirect('/admin/categories')->with('add', 'Categories Created!');
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Category $category)
     {
-        $category = Category::find($id);
-        return view('admin.category.edit', compact('category'));
+        return view('admin.category.create-edit', compact('category'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Category $category)
     {
         $request->validate([
-            'name' => 'required|unique:categories,name,'.$id,
+            'name' => 'required|unique:categories,name,'.$category->id,
         ]);
 
-        Category::find($id)->update([
+        $category->update([
             'name' => $request->name,
         ]);
 
-        return redirect('/categories')->with('add', 'Category Updated!');
+        return redirect('/admin/categories')->with('add', 'Category Updated!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Category $category)
     {
-        Category::find($id)->delete();
+        $category->delete();
         return back()->with('del', 'Category Deleted!');
     }
 }

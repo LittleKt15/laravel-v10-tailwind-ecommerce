@@ -13,7 +13,7 @@
 
         <div class="grid md:grid-cols-4 sm:grid-cols-3 gap-4 pb-5 clear-both">
             <div>
-                <a href="{{ url('/roles') }}"
+                <a href="{{ url('/admin/roles') }}"
                     class="block max-w-sm p-5 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                     <h5 class="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white text-center">User:
                         <span
@@ -22,7 +22,7 @@
                 </a>
             </div>
             <div>
-                <a href="{{ url('/categories') }}"
+                <a href="{{ url('/admin/categories') }}"
                     class="block max-w-sm p-5 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                     <h5 class="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white text-center">Category:
                         <span
@@ -31,7 +31,7 @@
                 </a>
             </div>
             <div>
-                <a href="{{ url('/products') }}"
+                <a href="{{ url('/admin/products') }}"
                     class="block max-w-sm p-5 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                     <h5 class="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white text-center">Product:
                         <span
@@ -40,7 +40,7 @@
                 </a>
             </div>
             <div>
-                <a href="{{ url('/purchases') }}"
+                <a href="{{ url('/admin/purchases') }}"
                     class="block max-w-sm p-5 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                     <h5 class="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white text-center">Purchase:
                         <span
@@ -49,7 +49,7 @@
                 </a>
             </div>
             <div>
-                <a href="{{ url('/suppliers') }}"
+                <a href="{{ url('/admin/suppliers') }}"
                     class="block max-w-sm p-5 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                     <h5 class="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white text-center">Supplier:
                         <span
@@ -58,7 +58,7 @@
                 </a>
             </div>
             <div>
-                <a href="{{ url('/orders') }}"
+                <a href="{{ url('/admin/orders') }}"
                     class="block max-w-sm p-5 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                     <h5 class="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white text-center">Order:
                         <span

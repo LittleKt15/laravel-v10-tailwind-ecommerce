@@ -4,7 +4,7 @@
     <div class="container mx-auto p-5">
         <div class="align-middle">
             <span class="text-gray-700 text-xl font-semibold">Category List</span>
-            <a href="{{ url('categories/create') }}"
+            <a href="{{ url('/admin/categories/create') }}"
                 class="float-right py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75">Add
                 Category</a>
         </div>
@@ -66,7 +66,7 @@
 
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-10 clear-both">
             <div class="pb-1 bg-white float-right">
-                <form class="flex items-center" action="{{ url('/search-categories') }}" method="GET">
+                <form class="flex items-center" action="{{ url('/admin/categories') }}" method="GET">
                     @csrf
                     <label for="simple-search" class="sr-only">Search</label>
                     <div class="relative w-full">
@@ -78,9 +78,9 @@
                                     clip-rule="evenodd"></path>
                             </svg>
                         </div>
-                        <input type="text" name="search_data" id="table-search" id="simple-search"
+                        <input type="text" name="search" id="table-search" id="simple-search"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="Search" required>
+                            placeholder="Search">
                     </div>
                     <button type="submit"
                         class="p-2.5 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -109,12 +109,12 @@
                                 {{ $index + $categories->firstItem() }}</th>
                             <td class="px-6 py-4">{{ $category->name }}</td>
                             <td class="px-6 py-4">
-                                <form action="{{ url('/categories/' . $category->id) }}" method="POST">
+                                <form action="{{ url('/admin/categories/' . $category->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <div class="flex gap-4">
                                         <a x-data="{ tooltip: 'Edite' }"
-                                            href="{{ url('/categories/' . $category->id . '/edit') }}"
+                                            href="{{ url('/admin/categories/' . $category->id . '/edit') }}"
                                             class="text-green-600">
                                             <svg fill="none" stroke="currentColor" stroke-width="1.5"
                                                 viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"

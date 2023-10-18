@@ -6,21 +6,22 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function __construct()
-    {
-        $this->middleware('isAdmin');
-    }
-
     public function index()
     {
-        $products = Product::paginate(5);
+        $search = "%" . request('search') . "%";
+        $products = Product::when($search, function ($query) use ($search) {
+            $query->where('name', 'like', $search)->orWhere('description', 'like', $search)->orWhere('price', 'like', $search)->orWhereHas('category', function ($category) use ($search) {
+                $category->where('name', 'like', $search);
+            });
+        })->orderBy('id', 'desc')->paginate(5);
+
         return view('admin.product.index', compact('products'));
     }
 
@@ -30,7 +31,8 @@ class ProductController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('admin.product.create', compact('categories'));
+        $product = new Product();
+        return view('admin.product.create-edit', compact('categories', 'product'));
     }
 
     /**
@@ -38,7 +40,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $data = $request->validate([
             'name' => 'required',
             'color' => 'required',
             'size' => 'required',
@@ -49,57 +51,36 @@ class ProductController extends Controller
             'category_id' => 'required',
         ]);
 
-        $image = $request->image;
-        $imageName = uniqid() . '_' . $image->getClientOriginalName();
-        $image->storeAs('public/product-images', $imageName);
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('product-images', 'public');
+        }
 
-        Product::create([
-            'name' => $request->name,
-            'color' => $request->color,
-            'size' => $request->size,
-            'description' => $request->description,
-            'quantity' => $request->quantity,
-            'price' => $request->price,
-            'image' => $imageName,
-            'category_id' => $request->category_id,
-        ]);
+        Product::create($data);
 
-        return redirect('/products')->with('add', 'Product Created!');
+        return redirect('/admin/products')->with('add', 'Product Created!');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Product $product)
     {
-        $product = Product::find($id);
         return view('admin.product.show', compact('product'));
-    }
-
-    public function search(Request $request)
-    {
-        $searchData = "%" . $request->search_data . "%";
-        $products = Product::where('name', 'like', $searchData)->orWhere('description', 'like', $searchData)->orWhere('price', 'like', $searchData)->orWhereHas('category', function($category) use ($searchData){
-            $category->where('name', 'like', $searchData);
-        })->paginate(5);
-
-        return view('admin.product.index', compact('products'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Product $product)
     {
-        $product = Product::find($id);
         $categories = Category::all();
-        return view('admin.product.edit', compact('product', 'categories'));
+        return view('admin.product.create-edit', compact('product', 'categories'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Product $product)
     {
         $data = $request->validate([
             'name' => 'required',
@@ -112,30 +93,26 @@ class ProductController extends Controller
             'category_id' => 'required',
         ]);
 
-        $product = Product::find($id);
         if ($request->hasFile('image')) {
-            $productImage = $product->image;
-            File::delete('storage/product-images/' . $productImage);
+            if ($product->image) {
+                Storage::disk('public')->delete($product->image);
+            }
 
-            $image = $request->image;
-            $imageName = uniqid() . '_' . $image->getClientOriginalName();
-            $image->storeAs('public/product-images', $imageName);
-
-            $data['image'] = $imageName;
+            $data['image'] = $request->file('image')->store('product-images', 'public');
         }
         $product->update($data);
 
-        return redirect('/products')->with('add', 'Product Updated!');
+        return redirect('/admin/products')->with('add', 'Product Updated!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Product $product)
     {
-        $product = Product::find($id);
-        $productImage = $product->image;
-        File::delete('storage/product-images/'.$productImage);
+        if ($product->image) {
+            Storage::disk('public')->delete($product->image);
+        }
         $product->delete();
 
         return back()->with('del', 'Product Deleted');

@@ -10,9 +10,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\user\CartController;
 use App\Http\Controllers\user\CheckoutController;
 use App\Http\Controllers\user\IndexController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,19 +25,7 @@ use Inertia\Inertia;
 
 Route::get('/', [IndexController::class, 'index']);
 
-Route::get('/carts', [CartController::class, 'index']);
-Route::post('/carts/create', [CartController::class, 'cart']);
-Route::get('/product-details/{id}', [CartController::class, 'detail']);
-Route::get('/carts/delete/{id}', [CartController::class, 'delete']);
-
-Route::get('/checkouts/{id}', [CheckoutController::class, 'index']);
-Route::post('/checkouts', [CheckoutController::class, 'checkout']);
-
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
+Route::middleware('auth', 'isAdmin')->prefix('admin')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -47,10 +33,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboards', [AdminController::class, 'index']);
 
     Route::resource('/categories', CategoryController::class);
-    Route::get('/search-categories', [CategoryController::class, 'search']);
 
     Route::resource('/products', ProductController::class);
-    Route::get('/search-products', [ProductController::class, 'search']);
 
     Route::resource('/suppliers', SupplierController::class);
 
@@ -60,8 +44,17 @@ Route::middleware('auth')->group(function () {
     Route::get('/roles', [RoleController::class, 'index']);
     Route::get('/roles/{id}/edit', [RoleController::class, 'edit']);
     Route::post('/roles/{id}', [RoleController::class, 'update']);
-    Route::get('/roles/{id}', [RoleController::class, 'destory']);
+    Route::get('/roles/{id}', [RoleController::class, 'destroy']);
     Route::get('/search-roles', [RoleController::class, 'search']);
+
+    // User Routes
+    Route::get('/carts', [CartController::class, 'index']);
+    Route::post('/carts/create', [CartController::class, 'cart']);
+    Route::get('/product-details/{id}', [CartController::class, 'detail']);
+    Route::get('/carts/delete/{id}', [CartController::class, 'delete']);
+
+    Route::get('/checkouts/{id}', [CheckoutController::class, 'index']);
+    Route::post('/checkouts', [CheckoutController::class, 'checkout']);
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

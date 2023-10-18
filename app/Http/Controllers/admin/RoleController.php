@@ -8,21 +8,16 @@ use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('isAdmin');
-    }
-
     public function index()
     {
         $users = User::paginate(5);
         return view('admin.role.index', compact('users'));
     }
 
-    public function edit($id)
+    public function edit(string $id)
     {
-        $users = User::find($id);
-        return view('admin.role.edit', compact('users'));
+        $user = User::find($id);
+        return view('admin.role.edit', compact('user'));
     }
 
     public function update(Request $request, $id)
@@ -46,7 +41,7 @@ class RoleController extends Controller
         return view('admin.role.index', compact('users'));
     }
 
-    public function destory($id)
+    public function destroy($id)
     {
         User::find($id)->delete();
 

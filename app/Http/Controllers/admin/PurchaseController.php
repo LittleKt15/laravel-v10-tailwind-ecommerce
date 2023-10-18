@@ -13,11 +13,6 @@ class PurchaseController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function __construct()
-    {
-        $this->middleware('isAdmin');
-    }
-
     public function index()
     {
         $purchases = Purchase::paginate(5);
@@ -58,7 +53,7 @@ class PurchaseController extends Controller
             'grandtotal' => $request->grandtotal,
         ]);
 
-        return redirect('/purchases')->with('add', 'Purchase Created!');
+        return redirect('/admin/purchases')->with('add', 'Purchase Created!');
     }
 
     /**
@@ -111,6 +106,6 @@ class PurchaseController extends Controller
             'status' => 'confirmed',
         ]);
 
-        return redirect('/purchases')->with('add', 'Purchase Status Updated!');
+        return redirect('/admin/purchases')->with('add', 'Purchase Status Updated!');
     }
 }
