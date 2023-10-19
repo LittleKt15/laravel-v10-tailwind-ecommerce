@@ -64,17 +64,19 @@ class UserController extends Controller
     {
         $data = $request->validate([
             'name' => 'required',
-            'email' => 'required|email|unique:users,email' . $user->id,
+            'email' => 'required|email|unique:users,email,' . $user->id,
             'password' => 'nullable|min:8',
         ]);
 
         if ($request->filled('password')) {
             $data['password'] = Hash::make($data['password']);
+        } else {
+            unset($data['password']);
         }
 
         $user->update($data);
 
-        return redirect('/admin/users')->with('add', 'User Created!');
+        return redirect('/admin/users')->with('add', 'User Updated!');
     }
 
     /**
@@ -82,6 +84,11 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        $authenticatedUser = auth()->user();
+        if ($authenticatedUser && $authenticatedUser->id === $user->id) {
+            return back()->with('del', 'You cannot delete your own user data.');
+        }
+
         $user->delete();
 
         return back()->with('del', 'User Deleted!');

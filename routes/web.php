@@ -38,10 +38,10 @@ Route::middleware('auth', 'isAdmin')->prefix('admin')->group(function () {
 
     Route::resource('/suppliers', SupplierController::class);
 
-    Route::resource('/purchases', PurchaseController::class);
-    Route::post('/purchases/status/{id}', [PurchaseController::class, 'statusUpdate']);
-
     Route::resource('/users', UserController::class);
+
+    Route::resource('/purchases', PurchaseController::class);
+    Route::post('/purchases/status/{purchase}', [PurchaseController::class, 'statusUpdate']);
 
     // User Routes
     Route::get('/carts', [CartController::class, 'index']);

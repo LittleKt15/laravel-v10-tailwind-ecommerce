@@ -4,7 +4,7 @@
     <div class="container mx-auto p-5">
         <h2 class="text-xl font-semibold text-gray-800 pb-5">Purchase Create Form</h2>
 
-        <form action="{{ url('/purchases') }}" method="POST">
+        <form action="{{ url('/admin/purchases') }}" method="POST">
             @csrf
             <div class="mb-4">
                 <label for="product_id" class="block text-gray-700 font-bold mb-2">Select Product to Purchase</label>
@@ -78,7 +78,7 @@
                 <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
                     Submit
                 </button>
-                <a href="{{ url('/purchases') }}"
+                <a href="{{ url('/admin/purchases') }}"
                     class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded mx-1">Back</a>
             </div>
         </form>

@@ -70,16 +70,6 @@
         </div>
 
         <div class="mb-4">
-            <label for="quantity" class="block text-gray-700 font-bold mb-2">Quantity:</label>
-            <input type="number" id="quantity" name="quantity" placeholder="Enter quantity"
-                value="{{ $product->quantity ?? old('quantity') }}"
-                class="form-input border rounded-md w-full py-2 px-3 text-gray-700 @error('quantity') bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 @enderror">
-            @error('quantity')
-                <p class="text-red-500 text-xs italic">{{ $message }}</p>
-            @enderror
-        </div>
-
-        <div class="mb-4">
             <label for="price" class="block text-gray-700 font-bold mb-2">Price:</label>
             <input type="number" id="price" name="price" placeholder="Enter price"
                 value="{{ $product->price ?? old('price') }}"

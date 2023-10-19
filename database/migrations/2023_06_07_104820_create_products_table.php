@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('color');
             $table->string('size');
             $table->text('description');
-            $table->integer('quantity');
+            $table->integer('quantity')->default(0);
             $table->integer('price');
             $table->longText('image')->nullable();
             $table->integer('category_id');

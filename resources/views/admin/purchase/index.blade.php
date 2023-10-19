@@ -4,7 +4,7 @@
     <div class="container mx-auto p-5">
         <div class="align-middle">
             <span class="text-gray-700 text-xl font-semibold">Purchase List</span>
-            <a href="{{ url('purchases/create') }}"
+            <a href="{{ url('/admin/purchases/create') }}"
                 class="float-right py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75">
                 Purchase Product</a>
         </div>
@@ -66,7 +66,7 @@
 
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-10 clear-both">
             <div class="pb-1 bg-white float-right">
-                <form class="flex items-center" action="" method="GET">
+                <form class="flex items-center" action="{{ url('/admin/purchases') }}" method="GET">
                     @csrf
                     <label for="simple-search" class="sr-only">Search</label>
                     <div class="relative w-full">
@@ -78,9 +78,9 @@
                                     clip-rule="evenodd"></path>
                             </svg>
                         </div>
-                        <input type="text" name="search_data" id="table-search" id="simple-search"
+                        <input type="text" name="search" id="table-search" id="simple-search"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="Search" required>
+                            placeholder="Search">
                     </div>
                     <button type="submit"
                         class="p-2.5 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -100,7 +100,7 @@
                         <th scope="col" class="px-6 py-3">Purchaser</th>
                         <th scope="col" class="px-6 py-3">Product</th>
                         <th scope="col" class="px-6 py-3">Supplier</th>
-                        <th scope="col" class="px-6 py-3">Available Quantity</th>
+                        <th scope="col" class="px-6 py-3">Purchased Quantity</th>
                         <th scope="col" class="px-6 py-3">Status</th>
                         <th scope="col" class="px-6 py-3">Action</th>
                     </tr>
@@ -114,22 +114,14 @@
                             <td class="px-6 py-4">{{ $purchase->name }}</td>
                             <td class="px-6 py-4">{{ $purchase->product->name }}</td>
                             <td class="px-6 py-4">{{ $purchase->supplier->name }}</td>
-                            @if ($purchase->product->quantity < 3)
-                                <td class="px-6 py-4 text-red-500">{{ $purchase->product->quantity }}</td>
-                            @else
-                                <td class="px-6 py-4 text-green-500">{{ $purchase->product->quantity }}</td>
-                            @endif
-                            @if ($purchase->status === 'pending')
-                                <td class="px-6 py-4 text-red-500">{{ $purchase->status }}</td>
-                            @else
-                                <td class="px-6 py-4 text-green-500">{{ $purchase->status }}</td>
-                            @endif
+                            <td class="px-6 py-4">{{ $purchase->quantity }}</td>
+                            <td class="px-6 py-4 {{ $purchase->status === 'pending' ? 'text-red-500' : 'text-green-500' }}">{{ $purchase->status }}</td>
                             <td class="px-6 py-4">
-                                <form action="{{ url('/purchases/' . $purchase->id) }}" method="POST">
+                                <form action="{{ url('/admin/purchases/' . $purchase->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <div class="flex gap-4">
-                                        <a href="{{ url('/purchases/' . $purchase->id) }}" class="text-indigo-600">
+                                        <a href="{{ url('/admin/purchases/' . $purchase->id) }}" class="text-indigo-600">
                                             <svg fill="none" stroke="currentColor" stroke-width="1.5" class="h-6 w-6"
                                                 viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
                                                 aria-hidden="true">

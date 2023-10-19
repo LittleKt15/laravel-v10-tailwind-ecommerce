@@ -15,7 +15,14 @@ class PurchaseController extends Controller
      */
     public function index()
     {
-        $purchases = Purchase::paginate(5);
+        $search = "%" . request('search') . "%";
+        $purchases = Purchase::when($search, function ($query) use ($search) {
+            $query->where('name', 'like', $search)->orWhere('quantity', 'like', $search)->orWhere('status', 'like', $search)->orWhereHas('product', function ($product) use ($search) {
+                $product->where('name', 'like', $search);
+            })->orWhereHas('supplier', function ($supplier) use ($search) {
+                $supplier->where('name', 'like', $search);
+            });
+        })->orderBy('id', 'desc')->paginate(5);
         return view('admin.purchase.index', compact('purchases'));
     }
 
@@ -59,9 +66,8 @@ class PurchaseController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Purchase $purchase)
     {
-        $purchase = Purchase::find($id);
         return view('admin.purchase.show', compact('purchase'));
     }
 
@@ -84,16 +90,14 @@ class PurchaseController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Purchase $purchase)
     {
-        Purchase::find($id)->delete();
-
+        $purchase->delete();
         return back()->with('del', 'Purchase List Deleted!');
     }
 
-    public function statusUpdate($id)
+    public function statusUpdate(Purchase $purchase)
     {
-        $purchase = Purchase::find($id);
         $product = $purchase->product;
 
         $newQuantity = $product->quantity + $purchase->quantity;

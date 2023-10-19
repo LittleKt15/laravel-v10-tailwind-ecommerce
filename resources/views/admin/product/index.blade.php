@@ -118,7 +118,9 @@
                             <td class="px-6 py-4">
                                 <img src="{{ asset('storage/' . $product->image) }}" alt="" width="100px">
                             </td>
-                            <td class="px-6 py-4">{{ $product->quantity }}</td>
+                            <td class="px-6 py-4 {{ $product->quantity === 0 ? 'text-red-600' : '' }}">
+                                {{ $product->quantity }}
+                            </td>
                             <td class="px-6 py-4">{{ $product->price }}$</td>
                             <td class="px-6 py-4">
                                 <form action="{{ url('/admin/products/' . $product->id) }}" method="POST">
