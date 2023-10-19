@@ -13,7 +13,7 @@
 
         <div class="grid md:grid-cols-4 sm:grid-cols-3 gap-4 pb-5 clear-both">
             <div>
-                <a href="{{ url('/admin/roles') }}"
+                <a href="{{ url('/admin/users') }}"
                     class="block max-w-sm p-5 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                     <h5 class="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white text-center">User:
                         <span

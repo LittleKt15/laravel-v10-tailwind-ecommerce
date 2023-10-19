@@ -4,7 +4,7 @@ use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\PurchaseController;
-use App\Http\Controllers\admin\RoleController;
+use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\admin\SupplierController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\user\CartController;
@@ -41,11 +41,7 @@ Route::middleware('auth', 'isAdmin')->prefix('admin')->group(function () {
     Route::resource('/purchases', PurchaseController::class);
     Route::post('/purchases/status/{id}', [PurchaseController::class, 'statusUpdate']);
 
-    Route::get('/roles', [RoleController::class, 'index']);
-    Route::get('/roles/{id}/edit', [RoleController::class, 'edit']);
-    Route::post('/roles/{id}', [RoleController::class, 'update']);
-    Route::get('/roles/{id}', [RoleController::class, 'destroy']);
-    Route::get('/search-roles', [RoleController::class, 'search']);
+    Route::resource('/users', UserController::class);
 
     // User Routes
     Route::get('/carts', [CartController::class, 'index']);

@@ -4,6 +4,9 @@
     <div class="container mx-auto p-5">
         <div class="align-middle">
             <span class="text-gray-700 text-xl font-semibold">User List</span>
+            <a href="{{ url('/admin/users/create') }}"
+                class="float-right py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75">Add
+                User</a>
         </div>
 
         @if (Session('add'))
@@ -63,7 +66,7 @@
 
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-10 clear-both">
             <div class="pb-1 bg-white float-right">
-                <form class="flex items-center" action="{{ url('/search-roles') }}" method="GET">
+                <form class="flex items-center" action="{{ url('/admin/users') }}" method="GET">
                     @csrf
                     <label for="simple-search" class="sr-only">Search</label>
                     <div class="relative w-full">
@@ -75,9 +78,9 @@
                                     clip-rule="evenodd"></path>
                             </svg>
                         </div>
-                        <input type="text" name="search_data" id="table-search" id="simple-search"
+                        <input type="text" name="search" id="table-search" id="simple-search"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="Search" required>
+                            placeholder="Search">
                     </div>
                     <button type="submit"
                         class="p-2.5 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -110,28 +113,32 @@
                             <td class="px-6 py-4">{{ $user->email }}</td>
                             <td class="px-6 py-4">{{ $user->role }}</td>
                             <td class="px-6 py-4">
-
-                                <div class="flex gap-4">
-                                    <a x-data="{ tooltip: 'Edite' }" href="{{ url('/admin/roles/' . $user->id . '/edit') }}"
-                                        class="text-green-600">
-                                        <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
-                                            xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10">
-                                            </path>
-                                        </svg> Edit
-                                    </a>
-                                    <a x-data="{ tooltip: 'Delete' }" class="text-red-600"
-                                        href="{{ url('/admin/roles/' . $user->id) }}"
-                                        onclick="return confirm('Are you sure you want to delete?')">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                            stroke-width="1.5" stroke="currentColor" class="h-6 w-6"
-                                            x-tooltip="tooltip">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
-                                        </svg> Delete
-                                    </a>
-                                </div>
+                                <form action="{{ url('/admin/users/' . $user->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <div class="flex gap-4">
+                                        <a x-data="{ tooltip: 'Edite' }"
+                                            href="{{ url('/admin/users/' . $user->id . '/edit') }}"
+                                            class="text-green-600">
+                                            <svg fill="none" stroke="currentColor" stroke-width="1.5"
+                                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                                                aria-hidden="true">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10">
+                                                </path>
+                                            </svg> Edit
+                                        </a>
+                                        <button x-data="{ tooltip: 'Delete' }" class="text-red-600"
+                                            onclick="return confirm('Are you sure you want to delete?')">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                stroke-width="1.5" stroke="currentColor" class="h-6 w-6"
+                                                x-tooltip="tooltip">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                                            </svg> Delete
+                                        </button>
+                                    </div>
+                                </form>
                             </td>
                         </tr>
                     @endforeach
