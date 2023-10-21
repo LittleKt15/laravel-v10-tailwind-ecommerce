@@ -17,7 +17,8 @@
 
 <body class="bg-gray-200 h-screen relative">
 
-    <nav class="bg-white border-gray-200 dark:bg-gray-900 fixed w-full z-20 top-0 left-0 border-b dark:border-gray-600 z-50">
+    <nav
+        class="bg-white border-gray-200 dark:bg-gray-900 fixed w-full z-20 top-0 left-0 border-b dark:border-gray-600 z-50">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
             <a href="{{ url('/') }}" class="flex items-center">
                 <img src="https://m.media-amazon.com/images/S/aplus-media/sc/0a86c50b-5b09-454d-9e0e-4acaf4ad1c40.__CR0,0,500,500_PT0_SX300_V1___.jpg"
@@ -25,82 +26,78 @@
                 <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">E-shirts</span>
             </a>
             <div class="flex md:order-2">
-                @if (Route::has('login'))
-                    @auth
-                        <div class="md:me-3">
-                            <button id="dropdownNavbarLink" data-dropdown-toggle="cart"
-                                class="flex items-center p-2 text-gray-900 relative rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                                <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
-                                    class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                                    aria-hidden="true">
-                                    <path
-                                        d="M1 1.75A.75.75 0 011.75 1h1.628a1.75 1.75 0 011.734 1.51L5.18 3a65.25 65.25 0 0113.36 1.412.75.75 0 01.58.875 48.645 48.645 0 01-1.618 6.2.75.75 0 01-.712.513H6a2.503 2.503 0 00-2.292 1.5H17.25a.75.75 0 010 1.5H2.76a.75.75 0 01-.748-.807 4.002 4.002 0 012.716-3.486L3.626 2.716a.25.25 0 00-.248-.216H1.75A.75.75 0 011 1.75zM6 17.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15.5 19a1.5 1.5 0 100-3 1.5 1.5 0 000 3z">
-                                    </path>
-                                </svg>
-                                <span class="sr-only">Notifications</span>
-                                <div
-                                    class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -right-2 dark:border-gray-900">
-                                    {{ $carts->count() }}</div>
-                            </button>
-                            <div id="cart"
-                                class="z-10 hidden font-normal divide-y rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
-                                <ul class="py-2 text-sm text-gray-700 dark:text-gray-400"
-                                    aria-labelledby="dropdownLargeButton">
-                                    @foreach ($carts as $cart)
-                                        <li>
-                                            <a href="{{ url('/product-details/' . $cart->product->id) }}"
-                                                class="block px-4 py-2 dark:hover:bg-gray-600 dark:hover:text-white">{{ $cart->product->name }}</a>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                                <div role="none">
-                                    <a href="{{ url('/carts') }}"
-                                        class="block text-sm text-gray-900 dark:text-white dark:hover:bg-gray-600 hover:rounded-lg px-4 py-3 w-full"
-                                        role="none">
-                                        Edit Cart
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <button id="dropdownNavbarLink" data-dropdown-toggle="user"
-                            class="flex items-center justify-between w-full md:ms-2 py-2 pl-3 pr-4 rounded md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
-                            <img class="w-7 h-7 rounded-full me-2"
-                                src="https://static.vecteezy.com/system/resources/previews/008/442/086/original/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg"
-                                alt="user photo">
+                @auth
+                    <div class="md:me-3">
+                        <button id="dropdownNavbarLink" data-dropdown-toggle="cart"
+                            class="flex items-center p-2 text-gray-900 relative rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
+                                class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                                aria-hidden="true">
+                                <path
+                                    d="M1 1.75A.75.75 0 011.75 1h1.628a1.75 1.75 0 011.734 1.51L5.18 3a65.25 65.25 0 0113.36 1.412.75.75 0 01.58.875 48.645 48.645 0 01-1.618 6.2.75.75 0 01-.712.513H6a2.503 2.503 0 00-2.292 1.5H17.25a.75.75 0 010 1.5H2.76a.75.75 0 01-.748-.807 4.002 4.002 0 012.716-3.486L3.626 2.716a.25.25 0 00-.248-.216H1.75A.75.75 0 011 1.75zM6 17.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15.5 19a1.5 1.5 0 100-3 1.5 1.5 0 000 3z">
+                                </path>
+                            </svg>
+                            <span class="sr-only">Notifications</span>
+                            <div
+                                class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -right-2 dark:border-gray-900">
+                                {{ $carts->count() }}</div>
                         </button>
-                        <div id="user"
-                            class="z-10 hidden font-normal divide-y rounded-lg shadow w-auto dark:bg-gray-700 dark:divide-gray-600">
-                            <div class="px-4 py-3" role="none">
-                                <p class="text-sm text-gray-900 dark:text-white" role="none">
-                                    {{ auth()->user()->name }} ({{ auth()->user()->role }})
-                                </p>
-                                <p class="text-sm font-medium text-gray-900 truncate dark:text-gray-300" role="none">
-                                    {{ auth()->user()->email }}
-                                </p>
+                        <div id="cart"
+                            class="z-10 hidden font-normal divide-y rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+                            <ul class="py-2 text-sm text-gray-700 dark:text-gray-400" aria-labelledby="dropdownLargeButton">
+                                @foreach ($carts as $cart)
+                                    <li>
+                                        <a href="{{ url('/product-details/' . $cart->product->id) }}"
+                                            class="block px-4 py-2 dark:hover:bg-gray-600 dark:hover:text-white">{{ $cart->product->name }}</a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                            <div role="none">
+                                <a href="{{ url('/carts') }}"
+                                    class="block text-sm text-gray-900 dark:text-white dark:hover:bg-gray-600 hover:rounded-lg px-4 py-3 w-full"
+                                    role="none">
+                                    Edit Cart
+                                </a>
                             </div>
-                            <form action="{{ route('logout') }}" method="post">
-                                @csrf
-                                <ul class="py-2 text-sm text-gray-700 dark:text-gray-400"
-                                    aria-labelledby="dropdownLargeButton">
-                                    <li>
-                                        <a href="#"
-                                            class="block px-4 py-2 dark:hover:bg-gray-600 dark:hover:text-white">Setting</a>
-                                    </li>
-                                    <li>
-                                        <button onclick="return confirm('Are you sure you want to logout?')"
-                                            class="block px-4 py-2 dark:hover:bg-gray-600 dark:hover:text-white w-full text-left">Logout</button>
-                                    </li>
-                                </ul>
-                            </form>
                         </div>
-                    @else
-                        <a href="{{ route('login') }}"
-                            class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login</a>
-                        <a href="{{ route('register') }}"
-                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 md:ms-2">Sign
-                            Up</a>
-                    @endauth
-                @endif
+                    </div>
+                    <button id="dropdownNavbarLink" data-dropdown-toggle="user"
+                        class="flex items-center justify-between w-full md:ms-2 py-2 pl-3 pr-4 rounded md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
+                        <img class="w-7 h-7 rounded-full me-2"
+                            src="https://static.vecteezy.com/system/resources/previews/008/442/086/original/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg"
+                            alt="user photo">
+                    </button>
+                    <div id="user"
+                        class="z-10 hidden font-normal divide-y rounded-lg shadow w-auto dark:bg-gray-700 dark:divide-gray-600">
+                        <div class="px-4 py-3" role="none">
+                            <p class="text-sm text-gray-900 dark:text-white" role="none">
+                                {{ auth()->user()->name }} ({{ auth()->user()->role }})
+                            </p>
+                            <p class="text-sm font-medium text-gray-900 truncate dark:text-gray-300" role="none">
+                                {{ auth()->user()->email }}
+                            </p>
+                        </div>
+                        <form action="{{ route('logout') }}" method="post">
+                            @csrf
+                            <ul class="py-2 text-sm text-gray-700 dark:text-gray-400" aria-labelledby="dropdownLargeButton">
+                                <li>
+                                    <a href="#"
+                                        class="block px-4 py-2 dark:hover:bg-gray-600 dark:hover:text-white">Setting</a>
+                                </li>
+                                <li>
+                                    <button onclick="return confirm('Are you sure you want to logout?')"
+                                        class="block px-4 py-2 dark:hover:bg-gray-600 dark:hover:text-white w-full text-left">Logout</button>
+                                </li>
+                            </ul>
+                        </form>
+                    </div>
+                @else
+                    <a href="{{ route('login') }}"
+                        class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Login</a>
+                    <a href="{{ route('register') }}"
+                        class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">Sign
+                        Up</a>
+                @endauth
                 <button data-collapse-toggle="navbar-sticky" type="button"
                     class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                     aria-controls="navbar-sticky" aria-expanded="false">
