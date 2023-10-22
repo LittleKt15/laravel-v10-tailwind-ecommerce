@@ -1,15 +1,8 @@
 <?php
 
-use App\Http\Controllers\admin\AdminController;
-use App\Http\Controllers\admin\CategoryController;
-use App\Http\Controllers\admin\ProductController;
-use App\Http\Controllers\admin\PurchaseController;
-use App\Http\Controllers\admin\UserController;
-use App\Http\Controllers\admin\SupplierController;
 use App\Http\Controllers\auth\AuthController;
-use App\Http\Controllers\user\CartController;
-use App\Http\Controllers\user\CheckoutController;
-use App\Http\Controllers\user\IndexController;
+use App\Http\Controllers\admin\{AdminController, CategoryController, ProductController, PurchaseController, UserController, SupplierController};
+use App\Http\Controllers\user\{IndexController, CartController, CheckoutController};
 use Illuminate\Support\Facades\Route;
 
 /*

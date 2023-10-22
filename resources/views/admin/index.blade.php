@@ -17,7 +17,7 @@
                     class="block max-w-sm p-5 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                     <h5 class="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white text-center">User:
                         <span
-                            class="text-lg font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-indigo-900 dark:text-indigo-300">{{ $users->count() }}</span>
+                            class="text-lg font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-indigo-900 dark:text-indigo-300">{{ auth()->user()->count() }}</span>
                     </h5>
                 </a>
             </div>
