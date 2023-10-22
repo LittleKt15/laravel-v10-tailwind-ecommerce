@@ -92,16 +92,9 @@
                 @foreach ($products->sortByDesc('created_at')->take(3) as $product)
                     <div
                         class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                        @if (auth()->user())
-                            <a href="{{ url('/product-details/' . $product->id) }}">
-                                <img class="rounded-t-lg" src="{{ asset('storage/' . $product->image) }}" alt="" />
-                            </a>
-                        @else
-                            <a href="{{ route('login') }}">
-                                <img class="rounded-t-lg" src="{{ asset('storage/product-images/' . $product->image) }}"
-                                    alt="" />
-                            </a>
-                        @endif
+                        <a href="{{ auth()->user() ? url('/product-details/' . $product->id) : route('login') }}">
+                            <img class="rounded-t-lg mx-auto" src="{{ asset('storage/' . $product->image) }}" alt="" />
+                        </a>
                         <div class="p-5">
                             <a href="#">
                                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
@@ -136,8 +129,9 @@
                                         </button>
                                     @else
                                         <button
-                                            class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                            Add to Cart
+                                            class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white {{ $product->quantity === 0 ? 'bg-red-500 hover:bg-red-800' : 'bg-blue-700 hover:bg-blue-800' }} rounded-lg focus:ring-4 focus:outline-none focus:ring-blue-300"
+                                            {{ $product->quantity === 0 ? 'disabled' : '' }}>
+                                            {{ $product->quantity === 0 ? 'Out of Stock' : 'Add to Cart' }}
                                             <svg fill="none" class="w-4 h-4 ml-2 -mr-1" stroke="currentColor"
                                                 stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
                                                 aria-hidden="true">
@@ -149,29 +143,16 @@
                                     @endif
                                 </form>
                             @endauth
-                            @if (auth()->user())
-                                <a href="{{ url('/product-details/' . $product->id) }}"
-                                    class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                    Read more
-                                    <svg aria-hidden="true" class="w-4 h-4 ml-2 -mr-1" fill="currentColor"
-                                        viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd"
-                                            d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                                            clip-rule="evenodd"></path>
-                                    </svg>
-                                </a>
-                            @else
-                                <a href="{{ route('login') }}"
-                                    class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                    Read more
-                                    <svg aria-hidden="true" class="w-4 h-4 ml-2 -mr-1" fill="currentColor"
-                                        viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd"
-                                            d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                                            clip-rule="evenodd"></path>
-                                    </svg>
-                                </a>
-                            @endif
+                            <a href="{{ auth()->user() ? url('/product-details/' . $product->id) : route('login') }}"
+                                class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                Read more
+                                <svg aria-hidden="true" class="w-4 h-4 ml-2 -mr-1" fill="currentColor"
+                                    viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                            </a>
                         </div>
                     </div>
                 @endforeach
@@ -188,8 +169,8 @@
                 <div class="grid gap-4">
                     <div>
                         <a href="{{ url('/product-details/' . $product->id) }}">
-                            <img class="h-auto max-w-full rounded-lg"
-                                src="{{ asset('storage/product-images/' . $product->image) }}" alt="">
+                            <img class="h-auto max-w-full rounded-lg mx-auto" src="{{ asset('storage/' . $product->image) }}"
+                                alt="">
                         </a>
                     </div>
                 </div>

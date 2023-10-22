@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Category;
+use App\Models\Supplier;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -47,6 +48,14 @@ class DatabaseSeeder extends Seeder
 
         Category::create([
             'name' => 'Dress Shirt',
+        ]);
+
+        Supplier::create([
+            'name' => 'Peter',
+            'email' => 'peter@gmail.com',
+            'phone' => '09123456789',
+            'company' => 'Giorando',
+            'address' => 'Yangon, Myanmar',
         ]);
     }
 }

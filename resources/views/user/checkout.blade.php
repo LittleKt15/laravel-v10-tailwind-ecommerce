@@ -4,7 +4,7 @@
     <div class="container mx-auto pt-20 pb-5 px-4">
         <div class="grid sm:grid-cols-1 md:grid-cols-2 gap-4">
             <div class="py-3">
-                <img class="h-auto sm:w-96" src="{{ asset('storage/product-images/' . $product->image) }}">
+                <img class="h-auto sm:w-96" src="{{ asset('storage/' . $product->image) }}">
             </div>
             <div class="p-3 bg-gray-300 rounded">
                 <form action="{{ url('/checkouts') }}" method="POST">

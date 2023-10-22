@@ -47,8 +47,8 @@ Route::middleware('auth', 'isAdmin')->prefix('admin')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/carts', [CartController::class, 'index']);
     Route::post('/carts/create', [CartController::class, 'cart']);
-    Route::get('/product-details/{id}', [CartController::class, 'detail']);
-    Route::get('/carts/delete/{id}', [CartController::class, 'delete']);
+    Route::get('/carts/delete/{cart}', [CartController::class, 'delete']);
+    Route::get('/product-details/{product}', [CartController::class, 'detail']);
 
     Route::get('/checkouts/{id}', [CheckoutController::class, 'index']);
     Route::post('/checkouts', [CheckoutController::class, 'checkout']);

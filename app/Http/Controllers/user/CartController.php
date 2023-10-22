@@ -13,8 +13,14 @@ class CartController extends Controller
     public function index()
     {
         $categories = Category::all();
-        // $carts = Cart::where('user_id', $user->id)->paginate(50);
-        $carts = Cart::where('user_id', auth()->user()->id)->paginate(50);
+        $search = "%" . request('search') . "%";
+        $carts = Cart::when($search, function ($query) use ($search) {
+            $query->whereHas('product', function ($product) use ($search) {
+                $product->where('name', 'like', $search)->orWhere('price', 'like', $search)->orWhereHas('category', function ($category) use ($search) {
+                    $category->where('name', 'like', $search);
+                });
+            });
+        })->where('user_id', auth()->user()->id)->paginate(50);
         return view('user.cart', compact('categories', 'carts'));
     }
 
@@ -29,17 +35,16 @@ class CartController extends Controller
         return back();
     }
 
-    public function detail($id)
+    public function detail(Product $product)
     {
         $carts = Cart::where('user_id', auth()->user()->id)->paginate(50);
-        $product = Product::find($id);
         $categories = Category::all();
         return view('user.detail', compact('product', 'carts', 'categories'));
     }
 
-    public function delete(string $id)
+    public function delete(Cart $cart)
     {
-        Cart::find($id)->delete();
+        $cart->delete();
 
         return back()->with('del', 'Cart Deleted!');
     }

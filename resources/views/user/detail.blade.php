@@ -5,7 +5,7 @@
     <div class="container mx-auto pt-20 pb-5 px-4">
         <div class="grid sm:grid-cols-1 md:grid-cols-2 gap-4">
             <div class="py-3 justify-self-center">
-                <img class="h-auto sm:w-96" src="{{ asset('storage/product-images/' . $product->image) }}">
+                <img class="h-auto sm:w-96" src="{{ asset('storage/' . $product->image) }}">
             </div>
             <div class="py-3">
                 <h1 class="text-center text-4xl font-bold">{{ $product->name }}</h1>
