@@ -8,7 +8,7 @@
 
         <div
             class="w-full max-w-sm mx-auto bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 clear-both">
-            <img class="px-8 pt-8 pb-4 rounded-t-lg" src="{{ asset('storage/' . $purchase->product->image) }}"
+            <img class="px-8 pt-8 pb-4 rounded-t-lg mx-auto" src="{{ asset('storage/' . $purchase->product->image) }}"
                 alt="product image" />
             <div class="px-5 pb-5">
                 <h5 class="text-3xl text-center pb-2 font-semibold tracking-tight text-gray-900 dark:text-white">
@@ -44,6 +44,5 @@
                 </div>
             </div>
         </div>
-
     </div>
 @endsection

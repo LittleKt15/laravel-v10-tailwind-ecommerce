@@ -2,24 +2,31 @@
 @section('title', 'Product')
 @section('content')
     <div class="container mx-auto p-5">
-        <h2 class="text-xl font-semibold text-gray-800 pb-5">Product Detail Form</h2>
+        <span class="text-xl font-semibold text-gray-800 pb-5">Product Detail Form</span>
+        <a href="{{ url('/admin/products') }}"
+            class="text-white float-right bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">Back</a>
 
         <div
-            class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mx-auto">
-            <img class="rounded-t-lg w-full h-auto max-w-xl" src="{{ asset('storage/' . $product->image) }}" alt="" />
-            <div class="p-5">
-                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">
-                    {{ $product->name }}</h5>
-                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Category: {{ $product->category->name }}</p>
-                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Description: {{ $product->description }}</p>
-                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Color: {{ $product->color }}</p>
-                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Size: {{ $product->size }}</p>
-                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Quantity: {{ $product->quantity }}</p>
-                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Price: {{ $product->price }}$</p>
-                <a href="{{ url('/admin/products') }}"
-                    class="text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800">Back</a>
+            class="w-full max-w-sm mx-auto bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 clear-both">
+            <img class="px-8 pt-8 pb-4 rounded-t-lg mx-auto" src="{{ asset('storage/' . $product->image) }}"
+                alt="product image" />
+            <div class="px-5 pb-5">
+                <h5 class="text-3xl text-center pb-2 font-semibold tracking-tight text-gray-900 dark:text-white">
+                    {{ $product->name }}
+                </h5>
+                <p class="text-lg font-semibold text-gray-900 dark:text-gray-400 p-1">Category:
+                    {{ $product->category->name }}</p>
+                <p class="text-lg font-semibold text-gray-900 dark:text-gray-400 p-1">Description:
+                    {{ $product->description }}</p>
+                <p class="text-lg font-semibold text-gray-900 dark:text-gray-400 p-1">Color:
+                    {{ $product->color }}</p>
+                <p class="text-lg font-semibold text-gray-900 dark:text-gray-400 p-1">Color:
+                    {{ $product->size }}</p>
+                <p class="text-lg font-semibold text-gray-900 dark:text-gray-400 p-1">Purchased Quantity:
+                    {{ $product->quantity }}
+                </p>
+                <p class="text-lg font-semibold text-gray-900 dark:text-gray-400 p-1">Price: {{ $product->price }}$</p>
             </div>
         </div>
-
     </div>
 @endsection

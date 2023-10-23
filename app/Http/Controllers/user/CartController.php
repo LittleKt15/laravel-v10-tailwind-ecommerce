@@ -39,7 +39,12 @@ class CartController extends Controller
     {
         $carts = Cart::where('user_id', auth()->user()->id)->paginate(50);
         $categories = Category::all();
-        return view('user.detail', compact('product', 'carts', 'categories'));
+
+        if ($product->quantity > 0) {
+            return view('user.detail', compact('product', 'carts', 'categories'));
+        } else {
+            abort(404, 'Page Not Found!');
+        }
     }
 
     public function delete(Cart $cart)

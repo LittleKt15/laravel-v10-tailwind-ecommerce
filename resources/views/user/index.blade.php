@@ -93,7 +93,8 @@
                     <div
                         class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                         <a href="{{ auth()->user() ? url('/product-details/' . $product->id) : route('login') }}">
-                            <img class="rounded-t-lg mx-auto" src="{{ asset('storage/' . $product->image) }}" alt="" />
+                            <img class="rounded-t-lg mx-auto" src="{{ asset('storage/' . $product->image) }}"
+                                alt="" />
                         </a>
                         <div class="p-5">
                             <a href="#">
@@ -162,19 +163,22 @@
 
     {{-- Availabel Products --}}
     <div class="container py-7 mx-auto px-4">
-        <h1 class="text-center font-bold text-3xl pb-5">Availabel Products</h1>
+        <h1 class="text-center font-bold text-3xl pb-5">Available Products</h1>
         <hr class="block m-auto bg-gray-900 h-1 w-5/6 rounded mb-5">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
             @foreach ($products as $product)
                 <div class="grid gap-4">
                     <div>
-                        <a href="{{ url('/product-details/' . $product->id) }}">
-                            <img class="h-auto max-w-full rounded-lg mx-auto" src="{{ asset('storage/' . $product->image) }}"
-                                alt="">
-                        </a>
+                        @if ($product->quantity > 0)
+                            <a href="{{ url('/product-details/' . $product->id) }}">
+                                <img class="h-auto max-w-full rounded-lg mx-auto"
+                                    src="{{ asset('storage/' . $product->image) }}" alt="">
+                            </a>
+                        @endif
                     </div>
                 </div>
             @endforeach
         </div>
     </div>
+
 @endsection
