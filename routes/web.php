@@ -50,6 +50,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/carts/delete/{cart}', [CartController::class, 'delete']);
     Route::get('/product-details/{product}', [CartController::class, 'detail']);
 
-    Route::get('/checkouts/{id}', [CheckoutController::class, 'index']);
+    Route::get('/checkouts/{product}', [CheckoutController::class, 'index']);
     Route::post('/checkouts', [CheckoutController::class, 'checkout']);
 });

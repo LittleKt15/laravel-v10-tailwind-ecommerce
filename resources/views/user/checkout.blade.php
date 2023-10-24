@@ -11,7 +11,7 @@
                     @csrf
                     <h1 class="text-center text-4xl font-bold">Checkout Page</h1>
 
-                    <input type="hidden" value="{{ $product->id }}">
+                    <input type="hidden" name="product_id" value="{{ $product->id }}">
 
                     <div class="pb-3">
                         <label for="phone"
@@ -48,7 +48,7 @@
                     <div class="pb-3">
                         <label for="card_no" class="block mb-2 text-md font-medium text-gray-900 dark:text-black">Card
                             No</label>
-                        <input type="text" id="card_no" name="card_no" placeholder="Enter your card number"
+                        <input type="number" id="card_no" name="card_no" placeholder="Enter your card number"
                             value="{{ old('card_no') }}"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 @error('card_no') bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 @enderror">
                         @error('card_no')
@@ -84,18 +84,21 @@
                         <label
                             class="inline-block mb-2 text-md font-medium text-gray-900 dark:text-black float-right">(Available
                             Quantity: {{ $product->quantity }})</label>
-                        <input type="integer" id="total_quantity" name="total_quantity"
+                        <input type="number" id="total_quantity" name="total_quantity"
                             placeholder="Enter your quantity to purchase" value="{{ old('total_quantity') }}"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 @error('total_quantity') bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 @enderror">
                         @error('total_quantity')
                             <p class="text-red-500 text-xs italic">{{ $message }}</p>
                         @enderror
+                        @if (Session('error'))
+                            <p class="text-red-500 text-xs italic">{{ Session('error') }}</p>
+                        @endif
                     </div>
 
                     <div class="pb-3">
                         <label for="total_amount" class="block mb-2 text-md font-medium text-gray-900 dark:text-black">Total
                             Amount</label>
-                        <input type="integer" id="total_amount" name="total_amount" value="{{ old('total_amount') }}"
+                        <input type="number" id="total_amount" name="total_amount" value="{{ old('total_amount') }}"
                             readonly
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 @error('total-amount') bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 @enderror">
                         @error('total_amount')

@@ -20,9 +20,9 @@ return new class extends Migration
             $table->date('exp_date');
             $table->integer('cvv');
             $table->integer('total_quantity');
-            $table->integer('vat');
-            $table->integer('total_amount');
-            $table->integer('grand_total');
+            $table->float('vat');
+            $table->float('total_amount');
+            $table->float('grand_total');
             $table->string('status')->default('pending');
             $table->integer('user_id');
             $table->integer('product_id');
