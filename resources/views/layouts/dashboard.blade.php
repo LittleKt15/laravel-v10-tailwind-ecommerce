@@ -14,6 +14,7 @@
 <body class="bg-gray-200">
     <x-nav />
 
+    {{-- <x-sidebar :orders="$orders" /> --}}
     <x-sidebar />
 
     <div class="px-4 pt-20 pb-10 sm:ml-64">

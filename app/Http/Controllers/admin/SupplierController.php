@@ -8,9 +8,6 @@ use Illuminate\Http\Request;
 
 class SupplierController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $search = "%" . request('search') . "%";
@@ -21,9 +18,6 @@ class SupplierController extends Controller
         return view('admin.supplier.index', compact('suppliers'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('admin.supplier.create-edit', [
@@ -31,9 +25,6 @@ class SupplierController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $data = $request->validate([
@@ -49,17 +40,11 @@ class SupplierController extends Controller
         return redirect('/admin/suppliers')->with('add', 'Supplier Added!');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Supplier $supplier)
     {
         return view('admin.supplier.create-edit', compact('supplier'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Supplier $supplier)
     {
         $data = $request->validate([
@@ -75,9 +60,6 @@ class SupplierController extends Controller
         return redirect('/admin/suppliers')->with('add', 'Supplier Updated!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Supplier $supplier)
     {
         $supplier->delete();

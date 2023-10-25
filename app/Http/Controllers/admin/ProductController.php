@@ -10,9 +10,6 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $search = "%" . request('search') . "%";
@@ -25,9 +22,6 @@ class ProductController extends Controller
         return view('admin.product.index', compact('products'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $categories = Category::all();
@@ -35,9 +29,6 @@ class ProductController extends Controller
         return view('admin.product.create-edit', compact('categories', 'product'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $data = $request->validate([
@@ -59,26 +50,17 @@ class ProductController extends Controller
         return redirect('/admin/products')->with('add', 'Product Created!');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Product $product)
     {
         return view('admin.product.show', compact('product'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Product $product)
     {
         $categories = Category::all();
         return view('admin.product.create-edit', compact('product', 'categories'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Product $product)
     {
         $data = $request->validate([
@@ -103,9 +85,6 @@ class ProductController extends Controller
         return redirect('/admin/products')->with('add', 'Product Updated!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Product $product)
     {
         if ($product->image) {

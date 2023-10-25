@@ -10,9 +10,6 @@ use Illuminate\Http\Request;
 
 class PurchaseController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $search = "%" . request('search') . "%";
@@ -26,9 +23,6 @@ class PurchaseController extends Controller
         return view('admin.purchase.index', compact('purchases'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $products = Product::all();
@@ -36,9 +30,6 @@ class PurchaseController extends Controller
         return view('admin.purchase.create', compact('products', 'suppliers'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -63,36 +54,25 @@ class PurchaseController extends Controller
         return redirect('/admin/purchases')->with('add', 'Purchase Created!');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Purchase $purchase)
     {
         return view('admin.purchase.show', compact('purchase'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Purchase $purchase)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Purchase $purchase)
     {
         $purchase->delete();
+
         return back()->with('del', 'Purchase List Deleted!');
     }
 

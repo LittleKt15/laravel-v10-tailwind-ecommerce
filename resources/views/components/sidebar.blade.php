@@ -90,7 +90,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#"
+                    <a href="{{ url('admin/orders') }}"
                         class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                             class="flex-shrink-0 w-6 h-6">

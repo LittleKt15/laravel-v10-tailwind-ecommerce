@@ -1,20 +1,9 @@
 <?php
 
 use App\Http\Controllers\auth\AuthController;
-use App\Http\Controllers\admin\{AdminController, CategoryController, ProductController, PurchaseController, UserController, SupplierController};
+use App\Http\Controllers\admin\{AdminController, CategoryController, OrderController, ProductController, PurchaseController, UserController, SupplierController};
 use App\Http\Controllers\user\{IndexController, CartController, CheckoutController};
 use Illuminate\Support\Facades\Route;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 // Home Page
 Route::get('/', [IndexController::class, 'index']);
@@ -41,6 +30,11 @@ Route::middleware('auth', 'isAdmin')->prefix('admin')->group(function () {
 
     Route::resource('/purchases', PurchaseController::class);
     Route::post('/purchases/status/{purchase}', [PurchaseController::class, 'statusUpdate']);
+
+    Route::get('/orders', [OrderController::class, 'index']);
+    Route::get('/orders/{checkout}', [OrderController::class, 'show']);
+    Route::post('/orders/status/{checkout}', [OrderController::class, 'statusUpdate']);
+    Route::delete('/orders/{checkout}', [OrderController::class, 'destroy']);
 });
 
 // User Routes

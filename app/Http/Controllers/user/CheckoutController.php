@@ -57,7 +57,7 @@ class CheckoutController extends Controller
                 ->where('product_id', $data['product_id'])
                 ->delete();
 
-            return redirect('/')->with('', '');
+            return redirect('/')->with('success', 'Your Products Will Be Arrived Soon!');
         }
     }
 }
