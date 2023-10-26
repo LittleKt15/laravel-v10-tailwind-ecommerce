@@ -14,7 +14,7 @@
                 <h5 class="text-3xl text-center pb-2 font-semibold tracking-tight text-gray-900 dark:text-white">
                     {{ $purchase->product->name }}
                 </h5>
-                <p class="text-lg font-semibold text-gray-900 dark:text-gray-400 p-1">Purchaser: {{ $purchase->name }}</p>
+                <p class="text-lg font-semibold text-gray-900 dark:text-gray-400 p-1">Purchaser: {{ $purchase->user->name }}</p>
                 <p class="text-lg font-semibold text-gray-900 dark:text-gray-400 p-1">Category:
                     {{ $purchase->product->category->name }}</p>
                 <p class="text-lg font-semibold text-gray-900 dark:text-gray-400 p-1">Supplier's Name:
@@ -27,19 +27,18 @@
                 </p>
                 <p class="text-lg font-semibold text-gray-900 dark:text-gray-400 p-1">Total Amount:
                     {{ $purchase->amount * $purchase->quantity }}$</p>
-                <p class="text-lg font-semibold text-gray-900 dark:text-gray-400 p-1">Status: @if ($purchase->status === 'pending')
-                        <span class="text-red-500 capitalize">{{ $purchase->status }}</span>
-                    @else
-                        <span class="text-green-500 capitalize">{{ $purchase->status }}</span>
-                    @endif
+                <p class="text-lg font-semibold text-gray-900 dark:text-gray-400 p-1">
+                    Status: <span
+                        class="{{ $purchase->status === 'pending' ? 'text-red-500' : 'text-green-500' }} capitalize">{{ $purchase->status }}</span>
                 </p>
                 <div class="flex items-center justify-between p-1">
                     <span class="text-xl font-bold text-gray-900 dark:text-white">Grand Total:
                         {{ $purchase->grandtotal }}$</span>
                     <form action="{{ url('/admin/purchases/status/' . $purchase->id) }}" method="POST">
                         @csrf
-                        <button onclick="return confirm('Are you sure you want to confirm the purchase?')" {{ $purchase->status === 'pending' ? '' : 'hidden' }}
-                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Confirm</button>
+                        <button onclick="return confirm('Are you sure you want to confirm the purchase?')"
+                            {{ $purchase->status === 'pending' ? '' : 'hidden' }}
+                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Confirm</button>
                     </form>
                 </div>
             </div>

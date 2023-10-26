@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('checkouts', function (Blueprint $table) {
             $table->id();
+            $table->string('order_no')->unique();
             $table->string('phone');
             $table->text('address');
             $table->string('direction');

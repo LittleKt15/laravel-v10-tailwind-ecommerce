@@ -14,10 +14,12 @@ class PurchaseController extends Controller
     {
         $search = "%" . request('search') . "%";
         $purchases = Purchase::when($search, function ($query) use ($search) {
-            $query->where('name', 'like', $search)->orWhere('quantity', 'like', $search)->orWhere('status', 'like', $search)->orWhereHas('product', function ($product) use ($search) {
+            $query->where('quantity', 'like', $search)->orWhere('status', 'like', $search)->orWhereHas('product', function ($product) use ($search) {
                 $product->where('name', 'like', $search);
             })->orWhereHas('supplier', function ($supplier) use ($search) {
                 $supplier->where('name', 'like', $search);
+            })->orWhereHas('user', function ($user) use ($search) {
+                $user->where('name', 'like', $search);
             });
         })->orderBy('id', 'desc')->paginate(5);
         return view('admin.purchase.index', compact('purchases'));
@@ -42,7 +44,7 @@ class PurchaseController extends Controller
         ]);
 
         Purchase::create([
-            'name' => auth()->user()->name,
+            'user_id' => auth()->user()->id,
             'product_id' => $request->product_id,
             'supplier_id' => $request->supplier_id,
             'quantity' => $request->quantity,

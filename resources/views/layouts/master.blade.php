@@ -58,6 +58,40 @@
                             </div>
                         </div>
                     </div>
+                    <div class="md:me-3">
+                        <button id="dropdownNavbarLink" data-dropdown-toggle="bell"
+                            class="flex items-center p-2 text-gray-900 relative rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                                <path
+                                    d="M5.85 3.5a.75.75 0 00-1.117-1 9.719 9.719 0 00-2.348 4.876.75.75 0 001.479.248A8.219 8.219 0 015.85 3.5zM19.267 2.5a.75.75 0 10-1.118 1 8.22 8.22 0 011.987 4.124.75.75 0 001.48-.248A9.72 9.72 0 0019.266 2.5z" />
+                                <path fill-rule="evenodd"
+                                    d="M12 2.25A6.75 6.75 0 005.25 9v.75a8.217 8.217 0 01-2.119 5.52.75.75 0 00.298 1.206c1.544.57 3.16.99 4.831 1.243a3.75 3.75 0 107.48 0 24.583 24.583 0 004.83-1.244.75.75 0 00.298-1.205 8.217 8.217 0 01-2.118-5.52V9A6.75 6.75 0 0012 2.25zM9.75 18c0-.034 0-.067.002-.1a25.05 25.05 0 004.496 0l.002.1a2.25 2.25 0 11-4.5 0z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            <span class="sr-only">Notifications</span>
+                            <div
+                                class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -right-2 dark:border-gray-900">
+                                {{ auth()->user()->orders()->count() }}</div>
+                        </button>
+                        <div id="bell"
+                            class="z-10 hidden font-normal divide-y rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+                            <ul class="py-2 text-sm text-gray-700 dark:text-gray-400" aria-labelledby="dropdownLargeButton">
+                                @foreach (auth()->user()->orders as $order)
+                                    <li>
+                                        <a href="#"
+                                            class="block px-4 py-2 dark:hover:bg-gray-600 dark:hover:text-white">{{ $order->order_no }}</a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                            <div role="none">
+                                <a href=""
+                                    class="block text-sm text-gray-900 dark:text-white dark:hover:bg-gray-600 hover:rounded-lg px-4 py-3 w-full"
+                                    role="none">
+                                    Order History
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                     <button id="dropdownNavbarLink" data-dropdown-toggle="user"
                         class="flex items-center justify-between w-full md:ms-2 py-2 pl-3 pr-4 rounded md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"

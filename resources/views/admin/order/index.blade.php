@@ -45,7 +45,7 @@
                         <th scope="col" class="px-6 py-3">Product</th>
                         <th scope="col" class="px-6 py-3">Customer</th>
                         <th scope="col" class="px-6 py-3">Phone</th>
-                        <th scope="col" class="px-6 py-3">Purchased Quantity</th>
+                        <th scope="col" class="px-6 py-3">Ordered Quantity</th>
                         <th scope="col" class="px-6 py-3">Status</th>
                         <th scope="col" class="px-6 py-3">Action</th>
                     </tr>
@@ -76,7 +76,7 @@
                                                     clip-rule="evenodd" />
                                             </svg> View
                                         </a>
-                                        <button class="text-red-600"
+                                        <button class="text-red-600" {{ $order->status === 'pending' ? 'hidden' : '' }}
                                             onclick="return confirm('Are you sure you want to delete?')">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                                                 class="w-6 h-6">

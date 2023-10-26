@@ -4,7 +4,6 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Checkout;
-use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
@@ -16,7 +15,7 @@ class OrderController extends Controller
                 $product->where('name', 'like', $search);
             })->orWhereHas('user', function ($user) use ($search) {
                 $user->where('name', 'like', $search);
-            });;
+            });
         })->orderBy('id', 'desc')->paginate(5);
 
         return view('admin.order.index', compact('orders'));
@@ -34,8 +33,12 @@ class OrderController extends Controller
         return back()->with('del', 'Order List Deleted!');
     }
 
-    public function statusUpdate()
+    public function statusUpdate(Checkout $checkout)
     {
-        //
+        $checkout->update([
+            'status' => 'confirmed',
+        ]);
+
+        return redirect('/admin/orders')->with('add', 'Order Status Updated!');
     }
 }

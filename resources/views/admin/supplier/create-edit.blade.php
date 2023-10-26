@@ -61,7 +61,7 @@
             <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
                 {{ $supplier->id === null ? 'Store' : 'Update' }}
             </button>
-            <a href="{{ url('/suppliers') }}"
+            <a href="{{ url('/admin/suppliers') }}"
                 class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded mx-1">Back</a>
         </div>
         </form>

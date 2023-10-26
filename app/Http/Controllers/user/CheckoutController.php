@@ -25,6 +25,9 @@ class CheckoutController extends Controller
 
     public function checkout(Request $request)
     {
+        $product = Product::find(request()->product_id);
+        $productQuantity = $product->quantity;
+
         $data = $request->validate([
             'phone' => 'required',
             'address' => 'required',
@@ -32,7 +35,17 @@ class CheckoutController extends Controller
             'card_no' => 'required',
             'exp_date' => 'required',
             'cvv' => 'required|numeric',
-            'total_quantity' => 'required|integer|min:1',
+            // 'total_quantity' => 'required|integer|min:1',
+            'total_quantity' => [
+                'required',
+                'integer',
+                'min:1',
+                function ($attribute, $value, $fail) use ($productQuantity) {
+                    if ($value > $productQuantity) {
+                        $fail($attribute . ' is greater than the available quantity.');
+                    }
+                },
+            ],
             'total_amount' => 'required',
             'vat' => 'required',
             'grand_total' => 'required',
@@ -40,24 +53,17 @@ class CheckoutController extends Controller
         ]);
 
         $data['user_id'] = auth()->user()->id;
-        $product = Product::find(request()->product_id);
+        $data['order_no'] = 'O-' . str_pad(Checkout::count() + 1, 3, '0', STR_PAD_LEFT);
+        Checkout::create($data);
 
-        if ($product) {
-            if ($data['total_quantity'] > $product->quantity) {
-                return back()->with('error', 'Total quantity exceeds available quantity.');
-            }
+        $newQuantity = $product->quantity - $data['total_quantity'];
+        $product->quantity = $newQuantity;
+        $product->save();
 
-            Checkout::create($data);
+        Cart::where('user_id', auth()->user()->id)
+            ->where('product_id', $data['product_id'])
+            ->delete();
 
-            $newQuantity = $product->quantity - $data['total_quantity'];
-            $product->quantity = $newQuantity;
-            $product->save();
-
-            Cart::where('user_id', auth()->user()->id)
-                ->where('product_id', $data['product_id'])
-                ->delete();
-
-            return redirect('/')->with('success', 'Your Products Will Be Arrived Soon!');
-        }
+        return redirect('/')->with('success', 'Your Products Will Be Arrived Soon!');
     }
 }

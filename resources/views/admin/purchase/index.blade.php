@@ -59,7 +59,7 @@
                             <th scope="row"
                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 {{ $index + $purchases->firstItem() }}</th>
-                            <td class="px-6 py-4">{{ $purchase->name }}</td>
+                            <td class="px-6 py-4">{{ $purchase->user->name }}</td>
                             <td class="px-6 py-4">{{ $purchase->product->name }}</td>
                             <td class="px-6 py-4">{{ $purchase->supplier->name }}</td>
                             <td class="px-6 py-4">{{ $purchase->quantity }}</td>

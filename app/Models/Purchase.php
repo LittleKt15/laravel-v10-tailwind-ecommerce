@@ -9,7 +9,7 @@ class Purchase extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'quantity', 'amount', 'vat', 'grandtotal', 'status', 'product_id', 'supplier_id'];
+    protected $fillable = ['quantity', 'amount', 'vat', 'grandtotal', 'status', 'product_id', 'supplier_id', 'user_id'];
 
     public function product()
     {
@@ -19,5 +19,10 @@ class Purchase extends Model
     public function supplier()
     {
         return $this->belongsTo('App\Models\Supplier', 'supplier_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User', 'user_id');
     }
 }

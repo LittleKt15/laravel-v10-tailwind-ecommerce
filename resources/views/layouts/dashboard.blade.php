@@ -18,7 +18,7 @@
     <x-sidebar />
 
     <div class="px-4 pt-20 pb-10 sm:ml-64">
-        <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
+        <div class="p-4 border-2 border-gray-400 border-dashed rounded-lg dark:border-gray-700">
             <div class="flex items-center justify-center h-auto rounded bg-gray-50">
                 @yield('content')
             </div>

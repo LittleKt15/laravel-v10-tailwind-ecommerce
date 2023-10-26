@@ -5,7 +5,7 @@
         <div class="flex items-center justify-between mb-2">
             <div class="text-xl mb-3 font-semibold py-2">Dashboard</div>
             <div class="text-lg mb-3 font-semibold">
-                <a href="{{ url('/') }}" class="text-white rounded-lg px-5 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                <a href="{{ url('/') }}" class="text-white rounded-lg px-5 py-2 bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-blue-800">
                     To Customer Site
                 </a>
             </div>

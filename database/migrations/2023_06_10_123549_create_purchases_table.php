@@ -14,7 +14,6 @@ return new class extends Migration
     {
         Schema::create('purchases', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
             $table->integer('quantity');
             $table->integer('amount');
             $table->double('vat');
@@ -22,6 +21,7 @@ return new class extends Migration
             $table->string('status')->default('pending');
             $table->integer('product_id');
             $table->integer('supplier_id');
+            $table->integer('user_id');
             $table->timestamps();
         });
     }
