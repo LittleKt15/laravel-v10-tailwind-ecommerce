@@ -16,8 +16,35 @@
 
 <body class="bg-gray-200 h-screen relative">
 
+    @if (Session('success'))
+        <div id="toast-top-right"
+            class="fixed flex items-center w-full max-w-xs p-4 space-x-4 text-gray-500 bg-white divide-x divide-gray-200 rounded-lg shadow top-5 right-5 dark:text-gray-400 dark:divide-gray-700 space-x dark:bg-gray-800 z-50"
+            role="alert">
+            <div
+                class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg dark:bg-green-800 dark:text-green-200">
+                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                    viewBox="0 0 20 20">
+                    <path
+                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                </svg>
+                <span class="sr-only">Check icon</span>
+            </div>
+            <div class="ml-3 text-sm font-normal">{{ Session('success') }}</div>
+            <button type="button"
+                class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
+                data-dismiss-target="#toast-top-right" aria-label="Close">
+                <span class="sr-only">Close</span>
+                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 14 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                </svg>
+            </button>
+        </div>
+    @endif
+
     <nav
-        class="bg-white border-gray-200 dark:bg-gray-900 fixed w-full z-20 top-0 left-0 border-b dark:border-gray-600 z-50">
+        class="bg-white border-gray-200 dark:bg-gray-900 fixed w-full z-20 top-0 left-0 border-b dark:border-gray-600 z-40">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
             <a href="{{ url('/') }}" class="flex items-center">
                 <img src="https://m.media-amazon.com/images/S/aplus-media/sc/0a86c50b-5b09-454d-9e0e-4acaf4ad1c40.__CR0,0,500,500_PT0_SX300_V1___.jpg"
@@ -37,12 +64,12 @@
                             <span class="sr-only">Notifications</span>
                             <div
                                 class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -right-2 dark:border-gray-900">
-                                {{ $carts->count() }}</div>
+                                {{ auth()->user()->carts()->count() }}</div>
                         </button>
                         <div id="cart"
                             class="z-10 hidden font-normal divide-y rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
                             <ul class="py-2 text-sm text-gray-700 dark:text-gray-400" aria-labelledby="dropdownLargeButton">
-                                @foreach ($carts as $cart)
+                                @foreach (auth()->user()->carts as $cart)
                                     <li>
                                         <a href="{{ url('/product-details/' . $cart->product->id) }}"
                                             class="block px-4 py-2 dark:hover:bg-gray-600 dark:hover:text-white">{{ $cart->product->name }}</a>
@@ -78,13 +105,13 @@
                             <ul class="py-2 text-sm text-gray-700 dark:text-gray-400" aria-labelledby="dropdownLargeButton">
                                 @foreach (auth()->user()->orders as $order)
                                     <li>
-                                        <a href="#"
+                                        <a href="{{ url('/order-histories/' . $order->id) }}"
                                             class="block px-4 py-2 dark:hover:bg-gray-600 dark:hover:text-white">{{ $order->order_no }}</a>
                                     </li>
                                 @endforeach
                             </ul>
                             <div role="none">
-                                <a href=""
+                                <a href="{{ url('/order-histories') }}"
                                     class="block text-sm text-gray-900 dark:text-white dark:hover:bg-gray-600 hover:rounded-lg px-4 py-3 w-full"
                                     role="none">
                                     Order History
@@ -113,7 +140,8 @@
                         </div>
                         <form action="{{ route('logout') }}" method="post">
                             @csrf
-                            <ul class="py-2 text-sm text-gray-700 dark:text-gray-400" aria-labelledby="dropdownLargeButton">
+                            <ul class="py-2 text-sm text-gray-700 dark:text-gray-400"
+                                aria-labelledby="dropdownLargeButton">
                                 <li>
                                     <a href="#"
                                         class="block px-4 py-2 dark:hover:bg-gray-600 dark:hover:text-white">Setting</a>

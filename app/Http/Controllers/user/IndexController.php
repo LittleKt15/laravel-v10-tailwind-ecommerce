@@ -14,7 +14,7 @@ class IndexController extends Controller
     {
         $categories = Category::all();
         $products = Product::all();
-        $carts = auth()->user() ? Cart::where('user_id', auth()->user()->id)->get() : null;
-        return view('user.index', compact('categories', 'products', 'carts'));
+        // $carts = auth()->user() ? Cart::where('user_id', auth()->user()->id)->get() : null;
+        return view('user.index', compact('categories', 'products'));
     }
 }

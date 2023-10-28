@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\auth\AuthController;
 use App\Http\Controllers\admin\{AdminController, CategoryController, OrderController, ProductController, PurchaseController, UserController, SupplierController};
-use App\Http\Controllers\user\{IndexController, CartController, CheckoutController};
+use App\Http\Controllers\user\{IndexController, CartController, CheckoutController, OrderHistoryController};
 use Illuminate\Support\Facades\Route;
 
 // Home Page
@@ -46,4 +46,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/checkouts/{product}', [CheckoutController::class, 'index']);
     Route::post('/checkouts', [CheckoutController::class, 'checkout']);
+
+    Route::get('/order-histories', [OrderHistoryController::class, 'index']);
+    Route::get('/order-histories/{checkout}', [OrderHistoryController::class, 'show']);
 });

@@ -16,8 +16,8 @@ class CartController extends Controller
         $search = "%" . request('search') . "%";
         $carts = Cart::when($search, function ($query) use ($search) {
             $query->whereHas('product', function ($product) use ($search) {
-                $product->where('name', 'like', $search)->orWhere('price', 'like', $search)->orWhereHas('category', function ($category) use ($search) {
-                    $category->where('name', 'like', $search);
+                $product->where('name', 'ilike', $search)->orWhere('price', 'like', $search)->orWhereHas('category', function ($category) use ($search) {
+                    $category->where('name', 'ilike', $search);
                 });
             });
         })->where('user_id', auth()->user()->id)->paginate(50);
@@ -32,7 +32,7 @@ class CartController extends Controller
         $cart->status = "Added to Cart";
         $cart->save();
 
-        return back();
+        return back()->with('success', 'Your Product is Added to Cart!');
     }
 
     public function detail(Product $product)

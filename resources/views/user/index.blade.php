@@ -108,7 +108,7 @@
                                     <input type="number" name="product_id" class="hidden" value="{{ $product->id }}">
                                     @php
                                         $addedToCart = false;
-                                        foreach ($carts as $cart) {
+                                        foreach (auth()->user()->carts as $cart) {
                                             if ($cart->status == 'Added to Cart' && $cart->product_id === $product->id) {
                                                 $addedToCart = true;
                                                 break;

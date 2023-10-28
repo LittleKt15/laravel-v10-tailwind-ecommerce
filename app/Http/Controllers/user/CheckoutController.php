@@ -13,11 +13,11 @@ class CheckoutController extends Controller
 {
     public function index(Product $product)
     {
-        $carts = Cart::where('user_id', auth()->user()->id)->get();
+        // $carts = Cart::where('user_id', auth()->user()->id)->get();
         $categories = Category::all();
 
         if ($product->quantity > 0) {
-            return view('user.checkout', compact('carts', 'categories', 'product'));
+            return view('user.checkout', compact('categories', 'product'));
         } else {
             abort(404, 'Page Not Found!');
         }
@@ -35,7 +35,6 @@ class CheckoutController extends Controller
             'card_no' => 'required',
             'exp_date' => 'required',
             'cvv' => 'required|numeric',
-            // 'total_quantity' => 'required|integer|min:1',
             'total_quantity' => [
                 'required',
                 'integer',
