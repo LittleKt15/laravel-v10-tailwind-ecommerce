@@ -15,11 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('order_no')->unique();
             $table->string('phone');
-            $table->text('address');
-            $table->string('direction');
+            $table->string('card_holder');
             $table->integer('card_no');
             $table->date('exp_date');
-            $table->integer('cvv');
+            $table->integer('cvc');
+            $table->text('address');
+            $table->string('state');
+            $table->integer('zip');
             $table->integer('total_quantity');
             $table->float('vat');
             $table->float('total_amount');
