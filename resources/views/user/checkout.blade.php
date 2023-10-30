@@ -47,9 +47,14 @@
                             <label
                                 class="peer-checked:border-2 peer-checked:border-gray-700 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4"
                                 for="radio_1">
-                                <img class="w-14 object-contain" src="/images/naorrAeygcJzX0SyNI4Y0.png" alt="" />
+                                {{-- <img class="w-14 object-contain" src="" alt="" /> --}}
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="w-14">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
                                 <div class="ml-5">
-                                    <span class="mt-2 font-semibold">Fedex Delivery</span>
+                                    <span class="mt-2 font-semibold">SwiftShip Express</span>
                                     <p class="text-slate-500 text-sm leading-6">Delivery: 2-4 Days</p>
                                 </div>
                             </label>
