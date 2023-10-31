@@ -44,7 +44,7 @@
     @endif
 
     <nav
-        class="bg-white border-gray-200 dark:bg-gray-900 fixed w-full z-20 top-0 left-0 border-b dark:border-gray-600 z-40">
+        class="bg-white border-gray-200 dark:bg-gray-900 fixed w-full top-0 left-0 border-b dark:border-gray-600 z-40">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
             <a href="{{ url('/') }}" class="flex items-center">
                 <img src="https://m.media-amazon.com/images/S/aplus-media/sc/0a86c50b-5b09-454d-9e0e-4acaf4ad1c40.__CR0,0,500,500_PT0_SX300_V1___.jpg"
