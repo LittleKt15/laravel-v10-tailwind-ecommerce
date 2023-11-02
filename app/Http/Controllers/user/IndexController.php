@@ -5,6 +5,7 @@ namespace App\Http\Controllers\user;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
+use Illuminate\Http\Request;
 
 class IndexController extends Controller
 {
@@ -19,6 +20,16 @@ class IndexController extends Controller
         }
 
         $products = $productsQuery->get();
+
+        return view('user.index', compact('categories', 'products'));
+    }
+
+    public function search()
+    {
+        $categories = Category::all();
+        $search = "%" . request('search') . "%";
+
+        $products = Product::where('name', 'ilike', $search)->orWhere('description', 'like', $search)->get();
 
         return view('user.index', compact('categories', 'products'));
     }

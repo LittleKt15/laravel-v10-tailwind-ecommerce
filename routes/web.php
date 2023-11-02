@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 
 // Home Page
 Route::get('/', [IndexController::class, 'index']);
+Route::get('/searchs', [IndexController::class, 'search']);
 
 // Login and Logout Routes
 Route::get('/registers', [AuthController::class, 'create'])->name('register')->middleware('guest');
