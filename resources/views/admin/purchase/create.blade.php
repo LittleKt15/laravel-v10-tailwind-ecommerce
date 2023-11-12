@@ -13,7 +13,8 @@
                     name="product_id">
                     <option value="" selected>Choose Product</option>
                     @foreach ($products as $product)
-                        <option value="{{ $product->id }}">{{ $product->name }}</option>
+                        <option value="{{ $product->id }}" {{ old('product_id') == $product->id ? 'selected' : '' }}>
+                            {{ $product->name }}</option>
                     @endforeach
                 </select>
                 @error('product_id')
@@ -28,7 +29,7 @@
                     name="supplier_id">
                     <option value="" selected>Choose Supplier</option>
                     @foreach ($suppliers as $supplier)
-                        <option value="{{ $supplier->id }}">{{ $supplier->name }}</option>
+                        <option value="{{ $supplier->id }}" {{ old('supplier_id') == $supplier->id ? 'selected' : '' }}>{{ $supplier->name }}</option>
                     @endforeach
                 </select>
                 @error('supplier_id')
